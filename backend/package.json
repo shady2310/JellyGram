@@ -1,0 +1,20 @@
+{
+  "name": "jellygram",
+  "version": "1.0.0",
+  "description": "Social Network to share pictures with your friends and whole world!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shady2310/JellyGram.git"
+  },
+  "author": "Shady Ramezani Quiroga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shady2310/JellyGram/issues"
+  },
+  "homepage": "https://github.com/shady2310/JellyGram#readme"
+}
