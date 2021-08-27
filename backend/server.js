@@ -3,10 +3,19 @@ const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-const { PORT, DB_URI } = process.env;
+// Routers require
+const UserRouter = require("./api/UserRouter");
+const PostRouter = require("./api/PostRouter");
+const CommentRouter = require("./api/CommentRouter");
 
+// DB connection
+const { PORT, DB_URI } = process.env;
 mongoose
-  .connect(DB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+  .connect(DB_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  })
   .then(() => {
     console.log(`DB connection sucessfully!`);
   })
@@ -17,19 +26,11 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  return res.send({
-    success: true,
-    message: "Hola",
-  });
-});
+// Routers use
+app.use("/user", UserRouter);
+app.use("/post", PostRouter);
+app.use("/comment", CommentRouter);
 
-app.get("/hello", (req, res) => {
-  return res.send({
-    success: true,
-    word: "Hello World!",
-  });
-});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} sucessfully`);
