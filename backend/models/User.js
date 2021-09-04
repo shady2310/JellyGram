@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+// TODO:  omitUndefined: true
 const UserSchema = mongoose.Schema({
   fullname: {
     type: String,
@@ -7,11 +7,11 @@ const UserSchema = mongoose.Schema({
   },
   dateofbirth: {
     type: Date,
-    required: true,
+    // required: true,
   },
   gender: {
     type: String,
-    required: true,
+    // required: true,
     enum: { values: ["Hombre", "Mujer", "Otro"] },
   },
   username: {
@@ -52,9 +52,39 @@ const UserSchema = mongoose.Schema({
       ref: "Post",
     },
   ],
-  stories: [{}],
-  links: [{}],
+  stories: [{
+    type: mongoose.Types.ObjectId,
+    ref: "Storie",
+  }],
+  links: [
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+    {
+      type: String,
+    },
+  ],
+  // TODO:  foreach a cada elemento del array y una vez cada findByIdAndUpdate
   savedposts: [{}],
 });
 
+//LIKES
 module.exports = mongoose.model("User", UserSchema);

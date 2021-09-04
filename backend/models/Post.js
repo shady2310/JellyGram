@@ -6,10 +6,13 @@ const PostSchema = mongoose.Schema({
     ref: "User",
   },
   image: {
-    type: String,
+    type: Object,
     required: true,
   },
-  likes: [{}],
+  likes: [{
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  }],
   date: {
     type: Date,
     default: Date.now,
@@ -21,7 +24,6 @@ const PostSchema = mongoose.Schema({
     {
       type: mongoose.Types.ObjectId,
       ref: "Comment",
-      date: Date,
     },
   ],
 });
