@@ -101,7 +101,6 @@ UserRouter.get("/", async (req, res) => {
 UserRouter.get("/searchUser", async (req, res) => {
   // const { id } = req.params;
   // TODO: Que no haga falta poner el username exacto
-  // FIXME: QUE NO ENVIE TODOS LOS DATOS DEL USUARIO
   const { username } = req.body;
   let users = await User.find({ username }, "username photo");
   return res.json({
@@ -157,7 +156,7 @@ UserRouter.put("/settings/password/:id", async (req, res) => {
 // ENLACES
 
 UserRouter.put("/settings/links/:id", async (req, res) => {
-  console.log(req.body.link);
+  // console.log(req.body.link);
   const { id } = req.params;
   const { link } = req.body;
   let usuario = await User.findByIdAndUpdate(
@@ -176,8 +175,8 @@ UserRouter.put("/settings/links/:id", async (req, res) => {
 });
 
 //////////////////////////////////////////////////////////////// PERFIL ////////////////////////////////////////////////////////////////
-
-//INFORMACION GENERAL DEL PERFIL
+// TODO: RUTA PARA MI PERFIL CON EL TOKEN
+//INFORMACION GENERAL DEL PERFIL PARA OTRO USER
 UserRouter.get("/profile/:id", async (req, res) => {
   const { id } = req.params;
   const userProfile = await User.findById(
@@ -192,6 +191,25 @@ UserRouter.get("/profile/:id", async (req, res) => {
 
 // FOLLOW / UNFOLLOW A USUARIO
 // TODO: Follow/unfollow
+
+
+// if (isFollowing == false) {
+//   await User.findByIdAndUpdate(user._id, {
+//     $push: { following: followedId },
+//   });
+// } else if (isFollowing == true) {
+//   await User.findByIdAndUpdate(user._id, {
+//     $pull: { following: followedId },
+//   });
+// }
+// // user = lo cogemos con el token -  y sabemos si el usuario esta logueado o no 
+
+
+// user.following.forEach((populatedElement) => {
+//   if (populatedElement._id == followedId) {
+//     isFollowing = true;
+//   }
+// });
 
 // USERS QUE SIGUES
 

@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routers use
-app.use("/user", tokenValidation, UserRouter);
+app.use("/user", UserRouter);
 app.use("/post", PostRouter);
 app.use("/comment", CommentRouter);
 

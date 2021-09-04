@@ -16,7 +16,8 @@ PostRouter.get("/explore", async (req, res) => {
 
 //NUEVO POST
 
-PostRouter.post("/newpost", async (req, res) => {
+PostRouter.post("/newpost/:id", async (req, res) => {
+  const id = req.params.id;
   const { image, description } = req.body;
 
   let post = new Post({
@@ -25,6 +26,7 @@ PostRouter.post("/newpost", async (req, res) => {
   });
 
   let newPost = await post.save();
+  // TODO: findbyidandupdate y $push de la id del post (newpost._Id) a la array del user a posts Y LO MISMO CON LOS COMENTARIOS SOBRE LOS POSTS
   return res.json({
     success: true,
     post: newPost,
@@ -65,7 +67,7 @@ PostRouter.post("/newpost", async (req, res) => {
 //   });
 // });
 
-
-
+// TODO: POST INDIVIDUAL VER
+// TODO: RUTA DE COMENTARIOS POST
 
 module.exports = PostRouter;
