@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 // Routers require
+const AuthRouter = require("./api/AuthRouter");
 const UserRouter = require("./api/UserRouter");
 const PostRouter = require("./api/PostRouter");
 const CommentRouter = require("./api/CommentRouter");
@@ -32,7 +33,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routers use
-app.use("/user", UserRouter);
+app.use("/auth", AuthRouter);
+app.use("/user", tokenValidation, UserRouter);
 app.use("/post", PostRouter);
 app.use("/comment", CommentRouter);
 

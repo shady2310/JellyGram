@@ -3,7 +3,6 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const PostRouter = express.Router();
 
-
 //EXPLORAR TODAS LAS PUBLICACIONES
 
 PostRouter.get("/explore", async (req, res) => {
@@ -26,7 +25,12 @@ PostRouter.post("/newpost/:id", async (req, res) => {
   });
 
   let newPost = await post.save();
-  // TODO: findbyidandupdate y $push de la id del post (newpost._Id) a la array del user a posts Y LO MISMO CON LOS COMENTARIOS SOBRE LOS POSTS
+
+
+  let userPost = await User.findByIdAndUpdate(id, {
+    $push: { posts: newPost._id },
+  });
+
   return res.json({
     success: true,
     post: newPost,
@@ -34,7 +38,6 @@ PostRouter.post("/newpost/:id", async (req, res) => {
 });
 
 // TODO: Hacer la ruta de los likes para los post
-
 
 //LIKE
 
