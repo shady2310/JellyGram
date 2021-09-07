@@ -3,6 +3,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const PostRouter = express.Router();
 
+
 //EXPLORAR TODAS LAS PUBLICACIONES
 
 PostRouter.get("/explore", async (req, res) => {

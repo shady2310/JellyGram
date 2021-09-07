@@ -23,13 +23,29 @@ UserRouter.get("/", async (req, res) => {
 
 UserRouter.get("/searchUser", async (req, res) => {
   // const { id } = req.params;
-  // TODO: Que no haga falta poner el username exacto
+  // TODO: Que no haga falta poner el username exacto y poner error al no encontrar al usuario
   const { username } = req.body;
-  let users = await User.find({ username }, "username photo");
-  return res.json({
-    success: true,
-    users,
-  });
+  let users = await User.find({ username: {$regex: username, $options: "i"} }, "username photo");
+
+  if(!username){
+    return res.json({
+      success: false,
+      message: "Debes introducir un nombre de usuario"
+    })
+  }
+
+  if (users == 0){
+    return res.json({
+      success: false,
+      message: "No se han econtrado usuarios",
+    });
+  }else {
+    return res.json({
+      success: true,
+      users,
+    });
+  }
+
 });
 
 //////////////////////////////////////////////////////////////// AJUSTES ////////////////////////////////////////////////////////////////
@@ -115,7 +131,7 @@ UserRouter.get("/profile/:id", async (req, res) => {
 // FOLLOW / UNFOLLOW A USUARIO
 // TODO: Follow/unfollow
 
-
+UserRouter.put("/un&follow/:id", async (req, res) => {
 // if (isFollowing == false) {
 //   await User.findByIdAndUpdate(user._id, {
 //     $push: { following: followedId },
@@ -133,6 +149,9 @@ UserRouter.get("/profile/:id", async (req, res) => {
 //     isFollowing = true;
 //   }
 // });
+})
+
+
 
 // USERS QUE SIGUES
 

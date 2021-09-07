@@ -26,7 +26,6 @@ CommentRouter.post("/newComment/:id", async (req, res) => {
     commentPost,
   });
 });
-// TODO: findbyidandupdate y $push de la id del post (newpost._Id) a la array del user a posts Y LO MISMO CON LOS COMENTARIOS SOBRE LOS POSTS
 
 //COMENTARIOS
 

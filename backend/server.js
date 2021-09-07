@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
-const moment = require("moment");
+// const moment = require("moment");
 
 // Routers require
 const AuthRouter = require("./api/AuthRouter");
@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routers use
 app.use("/auth", AuthRouter);
-app.use("/user", tokenValidation, UserRouter);
+app.use("/user", UserRouter);
 app.use("/post", PostRouter);
 app.use("/comment", CommentRouter);
 
