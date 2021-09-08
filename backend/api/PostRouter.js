@@ -3,7 +3,6 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const PostRouter = express.Router();
 
-
 //EXPLORAR TODAS LAS PUBLICACIONES
 
 PostRouter.get("/explore", async (req, res) => {
@@ -27,7 +26,6 @@ PostRouter.post("/newpost/:id", async (req, res) => {
 
   let newPost = await post.save();
 
-
   let userPost = await User.findByIdAndUpdate(id, {
     $push: { posts: newPost._id },
   });
@@ -40,38 +38,51 @@ PostRouter.post("/newpost/:id", async (req, res) => {
 
 // TODO: Hacer la ruta de los likes para los post
 
-//LIKE
+PostRouter.post("/like", async (req, res) => {
+  const { userId, postId, action } = req.body;
+  try {
+    switch (action) {
+      case "like":
+        await Post.findByIdAndUpdate(postId, { $push: { likes: userId } });
+        break;
 
-// PostRouter.put("/follow/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const { followId } = req.body;
-//   let user = await User.findByIdAndUpdate(
-//     id,
-//     { $push: { following: followId } },
-//     { new: true }
-//   );
-//   res.json({
-//     success: true,
-//     user,
-//   });
-// });
+      case "unlike":
+        await Post.findByIdAndUpdate(postId, { $pull: { likes: userId } });
+      break;
 
-// UNLIKE
-// PostRouter.put("/unfollow/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const { followId } = req.body;
-//   let user = await User.findByIdAndUpdate(
-//     id,
-//     { $pull: { following: followId } },
-//     { new: true }
-//   );
-//   res.json({
-//     success: true,
-//     user,
-//   });
-// });
+      default:
+        break;
+    }
 
-// TODO: POST INDIVIDUAL VER
+    return res.json({
+      success: true,
+    })
+    
+  } catch (err) {
+    res.json({
+      success: false,
+      error: err.message,
+    });
+  }
+});
+
+// POST INDIVIDUAL VER
+
+PostRouter.get("/post", async (req, res) => {
+  const { postId } = req.body;
+  try {
+    const singlePost = await Post.findById(postId, "userId image likes date description comments")
+    return res.json({
+      success: true,
+      singlePost,
+    })
+  } catch(err){
+    res.json({
+      success: false,
+    })
+  }
+})
+
 // TODO: RUTA DE COMENTARIOS POST
 
 module.exports = PostRouter;

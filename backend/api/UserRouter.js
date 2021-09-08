@@ -21,7 +21,6 @@ UserRouter.get("/", async (req, res) => {
 
 UserRouter.get("/searchUser", async (req, res) => {
   // const { id } = req.params;
-  // TODO: Que no haga falta poner el username exacto y poner error al no encontrar al usuario
   const { username } = req.body;
   let users = await User.find(
     { username: { $regex: username, $options: "i" } },
@@ -129,7 +128,6 @@ UserRouter.get("/profile/:id", async (req, res) => {
 });
 
 // FOLLOW / UNFOLLOW A USUARIO
-// TODO: Follow/unfollow
 
 UserRouter.post("/follow", async (req, res) => {
   const { follower, following, action } = req.body;
