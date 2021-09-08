@@ -4,10 +4,9 @@ const User = require("../models/User");
 const Storie = require("../models/Storie");
 const UserRouter = express.Router();
 
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 // TODO: Añadir los errores
-
 
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
 // TODO: YO y mis usuarios seguidos
@@ -25,27 +24,29 @@ UserRouter.get("/searchUser", async (req, res) => {
   // const { id } = req.params;
   // TODO: Que no haga falta poner el username exacto y poner error al no encontrar al usuario
   const { username } = req.body;
-  let users = await User.find({ username: {$regex: username, $options: "i"} }, "username photo");
+  let users = await User.find(
+    { username: { $regex: username, $options: "i" } },
+    "username photo"
+  );
 
-  if(!username){
+  if (!username) {
     return res.json({
       success: false,
-      message: "Debes introducir un nombre de usuario"
-    })
+      message: "Debes introducir un nombre de usuario",
+    });
   }
 
-  if (users == 0){
+  if (users == 0) {
     return res.json({
       success: false,
       message: "No se han econtrado usuarios",
     });
-  }else {
+  } else {
     return res.json({
       success: true,
       users,
     });
   }
-
 });
 
 //////////////////////////////////////////////////////////////// AJUSTES ////////////////////////////////////////////////////////////////
@@ -131,27 +132,41 @@ UserRouter.get("/profile/:id", async (req, res) => {
 // FOLLOW / UNFOLLOW A USUARIO
 // TODO: Follow/unfollow
 
-UserRouter.put("/un&follow/:id", async (req, res) => {
-// if (isFollowing == false) {
-//   await User.findByIdAndUpdate(user._id, {
-//     $push: { following: followedId },
-//   });
-// } else if (isFollowing == true) {
-//   await User.findByIdAndUpdate(user._id, {
-//     $pull: { following: followedId },
-//   });
-// }
-// // user = lo cogemos con el token -  y sabemos si el usuario esta logueado o no 
+UserRouter.post("/follow", async (req, res) => {
+  const { follower, following, action } = req.body;
+  try {
+    switch (action) {
+      case "follow":
+        await Promise.all([
+          User.findByIdAndUpdate(follower, {
+            $push: { following: following },
+          }),
+          User.findByIdAndUpdate(following, {
+            $push: { followers: follower },
+          }),
+        ]);
+        break;
 
+      case "unfollow":
+        await Promise.all([
+          User.findByIdAndUpdate(follower, {
+            $pull: { following: following },
+          }),
+          User.findByIdAndUpdate(following, {
+            $pull: { followers: follower },
+          }),
+        ]);
+        break;
 
-// user.following.forEach((populatedElement) => {
-//   if (populatedElement._id == followedId) {
-//     isFollowing = true;
-//   }
-// });
-})
+      default:
+        break;
+    }
 
-
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false, err });
+  }
+});
 
 // USERS QUE SIGUES
 
