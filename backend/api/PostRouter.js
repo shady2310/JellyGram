@@ -68,8 +68,8 @@ PostRouter.post("/like", async (req, res) => {
 
 // POST INDIVIDUAL VER
 
-PostRouter.get("/post", async (req, res) => {
-  const { postId } = req.body;
+PostRouter.get("/post/:postId", async (req, res) => {
+  const { postId } = req.params;
   try {
     const singlePost = await Post.findById(postId, "userId image likes date description comments")
     return res.json({
@@ -83,6 +83,5 @@ PostRouter.get("/post", async (req, res) => {
   }
 })
 
-// TODO: RUTA DE COMENTARIOS POST
 
 module.exports = PostRouter;

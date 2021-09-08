@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routers use
 app.use("/auth", AuthRouter);
-app.use("/user", UserRouter);
+app.use("/user", Auth, UserRouter);
 app.use("/post", PostRouter);
 app.use("/comment", CommentRouter);
 

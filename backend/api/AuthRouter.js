@@ -6,7 +6,7 @@ const AuthRouter = express();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const salt = bcrypt.genSaltSync(10);
-const hashToken = bcrypt.hashSync(process.env.TOKEN_WORD, salt);
+const hashToken = process.env.TOKEN_WORD;
 
 //////////////////////////////////////////////////////////////// REGISTRO ////////////////////////////////////////////////////////////////
 
@@ -38,14 +38,14 @@ AuthRouter.post("/register", async (req, res) => {
 
     let newUser = await user.save();
 
-    const accesstoken = createAccessToken({ id: newUser._id });
+    // const accesstoken = createAccessToken({ id: newUser._id });
 
-    // const token = jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
+    const token = jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
 
     return res.json({
       success: true,
       user: newUser,
-      accesstoken,
+      token,
     });
   } catch (error) {
     return res.json({
@@ -72,9 +72,7 @@ AuthRouter.post("/login", async (req, res) => {
   }
   try {
     if (await bcrypt.compare(password, user.password)) {
-      const createAccessToken = (user) => {
-        return jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
-      };
+      jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
       res.json({
         success: true,
         message: "Te has logueado correctamente",
