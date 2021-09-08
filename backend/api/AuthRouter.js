@@ -36,14 +36,16 @@ AuthRouter.post("/register", async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
-
     let newUser = await user.save();
+
+    const accesstoken = createAccessToken({ id: newUser._id });
+
+    // const token = jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
 
     return res.json({
       success: true,
       user: newUser,
-      token,
+      accesstoken,
     });
   } catch (error) {
     return res.json({
@@ -70,7 +72,9 @@ AuthRouter.post("/login", async (req, res) => {
   }
   try {
     if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
+      const createAccessToken = (user) => {
+        return jwt.sign({ id: user._id }, hashToken, { expiresIn: 3600 });
+      };
       res.json({
         success: true,
         message: "Te has logueado correctamente",

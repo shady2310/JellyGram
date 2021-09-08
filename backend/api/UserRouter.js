@@ -4,7 +4,6 @@ const User = require("../models/User");
 const Storie = require("../models/Storie");
 const UserRouter = express.Router();
 
-const jwt = require("jsonwebtoken");
 
 // TODO: Añadir los errores
 

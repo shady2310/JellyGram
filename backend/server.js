@@ -11,7 +11,7 @@ const PostRouter = require("./api/PostRouter");
 const CommentRouter = require("./api/CommentRouter");
 
 // Middlewares require
-const tokenValidation = require("./middlewares/tokenValidation");
+const Auth = require("./middlewares/Auth");
 
 // DB connection
 const { PORT, DB_URI } = process.env;
