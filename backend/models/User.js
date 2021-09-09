@@ -53,39 +53,22 @@ const UserSchema = mongoose.Schema({
       ref: "Post",
     },
   ],
-  stories: [{
-    type: mongoose.Types.ObjectId,
-    ref: "Storie",
-  }],
+  stories: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Storie",
+    },
+  ],
   links: [
     {
       type: String,
     },
-    {
-      type: String,
-    },
-    {
-      type: String,
-    },
-    {
-      type: String,
-    },
-    {
-      type: String,
-    },
-    {
-      type: String,
-    },
-    {
-      type: String,
-    },
-    {
-      type: String,
-    },
   ],
-  // TODO:  foreach a cada elemento del array y una vez cada findByIdAndUpdate
   savedposts: [{}],
 });
 
-//LIKES
+function arrayLimit(val) {
+  return val.length <= 7;
+}
+
 module.exports = mongoose.model("User", UserSchema);

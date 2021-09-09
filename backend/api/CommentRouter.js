@@ -29,12 +29,12 @@ CommentRouter.post("/newComment/:id", async (req, res) => {
 
 //COMENTARIOS
 
-CommentRouter.get("/", async (req, res) => {
-  let comments = await Comment.find({});
-  return res.json({
-    success: true,
-    comments,
-  });
-});
+// CommentRouter.get("/", async (req, res) => {
+//   let comments = await Comment.find({});
+//   return res.json({
+//     success: true,
+//     comments,
+//   });
+// });
 
 module.exports = CommentRouter;

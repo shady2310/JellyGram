@@ -36,7 +36,7 @@ PostRouter.post("/newpost/:id", async (req, res) => {
   });
 });
 
-// TODO: Hacer la ruta de los likes para los post
+// Like & unLike posts
 
 PostRouter.post("/like", async (req, res) => {
   const { userId, postId, action } = req.body;

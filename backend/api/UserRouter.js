@@ -66,6 +66,12 @@ UserRouter.get("/settings/:id", async (req, res) => {
 UserRouter.put("/settings/:id", async (req, res) => {
   const { id } = req.params;
   const { fullname, gender, username, photo, email } = req.body;
+  if (!fullname || !gender || !username || !email){
+    return res.json({
+      success: false,
+      message: "No puedes dejar datos en blanco"
+    })
+  }
   await User.findByIdAndUpdate(id, {
     fullname,
     gender,
@@ -82,6 +88,7 @@ UserRouter.put("/settings/:id", async (req, res) => {
 // CAMBIO DE CONTRASEÑA
 
 UserRouter.put("/settings/password/:id", async (req, res) => {
+  // TODO: Encriptar contraseña
   const { id } = req.params;
   const { password } = req.body;
   await User.findByIdAndUpdate(id, { password });
@@ -94,7 +101,6 @@ UserRouter.put("/settings/password/:id", async (req, res) => {
 // ENLACES
 
 UserRouter.put("/settings/links/:id", async (req, res) => {
-  // console.log(req.body.link);
   const { id } = req.params;
   const { link } = req.body;
   let usuario = await User.findByIdAndUpdate(
@@ -114,6 +120,22 @@ UserRouter.put("/settings/links/:id", async (req, res) => {
 
 //////////////////////////////////////////////////////////////// PERFIL ////////////////////////////////////////////////////////////////
 // TODO: RUTA PARA MI PERFIL CON EL TOKEN
+
+// Mi perfil
+UserRouter.get("/myProfile/:id", async (req, res) => {
+  const { id } = req.params;
+  const myProfile = await User.findById(
+    id,
+    "username photo followers following"
+  );
+  res.json({
+    success: true,
+    myProfile,
+  });
+});
+
+
+
 //INFORMACION GENERAL DEL PERFIL PARA OTRO USER
 UserRouter.get("/profile/:id", async (req, res) => {
   const { id } = req.params;
