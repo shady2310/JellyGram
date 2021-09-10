@@ -1,5 +1,6 @@
 const express = require("express");
 const cloudinary = require("cloudinary");
+const fs = require("fs");
 const Post = require("../models/Post");
 const User = require("../models/User");
 const PostRouter = express.Router();
@@ -27,7 +28,7 @@ PostRouter.get("/explore", async (req, res) => {
 PostRouter.post("/newpost", (req, res) => {
   try {
     // const id = req.params.id;
-    console.log(req.files);
+    // console.log(req.files);
 
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).json({
@@ -36,27 +37,39 @@ PostRouter.post("/newpost", (req, res) => {
       });
     }
 
+    let imagen = req.files.imagen;
+    console.log(imagen);
+
     // const { description } = req.body;
-    const file = req.files.file;
-    if (file.size > (1024 * 1024)*2) {
+
+    if (imagen.size > 1024 * 1024 * 2) {
+      removeTmp(imagen.tempFilePath);
       return res.status(400).json({
         success: false,
         message: "Archivo demasiado grande",
       });
     }
 
-    if (
-      file.mimetype !== "file/jpeg" &&
-      file.mimetype !== "file/png" &&
-      file.mimetype !== "image/jpg"
-    ) {
+    if (imagen.mimetype !== "image/jpeg" && imagen.mimetype !== "image/png") {
+      removeTmp(imagen.tempFilePath);
       return res.status(400).json({
         success: false,
         message: "Formato de archivo no soportado",
       });
     }
 
-    // cloudinary.v2.uploader.upload()
+    cloudinary.v2.uploader.upload(
+      imagen.tempFilePath,
+      { folder: "jellygram" },
+      async (err, result) => {
+        if (err) throw err;
+        removeTmp(imagen.tempFilePath);
+        res.json({
+          public_id: result.public_id,
+          url: result.secure_url,
+        });
+      }
+    );
 
     // let post = new Post({
     //   image,
@@ -129,5 +142,13 @@ PostRouter.get("/post/:postId", async (req, res) => {
     });
   }
 });
+
+/// ELIMINAR TEMPORALES DE IMAGENES
+
+const removeTmp = (path) => {
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
+};
 
 module.exports = PostRouter;

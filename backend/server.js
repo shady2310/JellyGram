@@ -1,9 +1,14 @@
 const express = require("express");
-const app = express();
 require("dotenv").config();
-const mongoose = require("mongoose");
+const app = express();
 const fileupload = require("express-fileupload");
-const multer  = require('multer')
+const mongoose = require("mongoose");
+
+app.use(
+  fileupload({
+    useTempFiles: true,
+  })
+);
 
 // const moment = require("moment");
 
@@ -34,9 +39,7 @@ mongoose
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(fileupload({
-  useTempFiles: true,
-}))
+
 
 // Routers use
 app.use("/auth", AuthRouter);
