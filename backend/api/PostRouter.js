@@ -1,7 +1,16 @@
 const express = require("express");
+const cloudinary = require("cloudinary");
 const Post = require("../models/Post");
 const User = require("../models/User");
 const PostRouter = express.Router();
+
+/////// CLOUDINARY //////
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 //EXPLORAR TODAS LAS PUBLICACIONES
 
@@ -15,25 +24,61 @@ PostRouter.get("/explore", async (req, res) => {
 
 //NUEVO POST
 
-PostRouter.post("/newpost/:id", async (req, res) => {
-  const id = req.params.id;
-  const { image, description } = req.body;
+PostRouter.post("/newpost", (req, res) => {
+  try {
+    // const id = req.params.id;
+    console.log(req.files);
 
-  let post = new Post({
-    image,
-    description,
-  });
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No se ha cargado ningún archivo",
+      });
+    }
 
-  let newPost = await post.save();
+    // const { description } = req.body;
+    const file = req.files.file;
+    if (file.size > (1024 * 1024)*2) {
+      return res.status(400).json({
+        success: false,
+        message: "Archivo demasiado grande",
+      });
+    }
 
-  let userPost = await User.findByIdAndUpdate(id, {
-    $push: { posts: newPost._id },
-  });
+    if (
+      file.mimetype !== "file/jpeg" &&
+      file.mimetype !== "file/png" &&
+      file.mimetype !== "image/jpg"
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Formato de archivo no soportado",
+      });
+    }
 
-  return res.json({
-    success: true,
-    post: newPost,
-  });
+    // cloudinary.v2.uploader.upload()
+
+    // let post = new Post({
+    //   image,
+    //   description,
+    // });
+
+    // let newPost = await post.save();
+
+    // let userPost = await User.findByIdAndUpdate(id, {
+    //   $push: { posts: newPost._id },
+    // });
+
+    // return res.json({
+    //   success: true,
+    //   post: newPost,
+    // });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 });
 
 // Like & unLike posts
@@ -48,7 +93,7 @@ PostRouter.post("/like", async (req, res) => {
 
       case "unlike":
         await Post.findByIdAndUpdate(postId, { $pull: { likes: userId } });
-      break;
+        break;
 
       default:
         break;
@@ -56,8 +101,7 @@ PostRouter.post("/like", async (req, res) => {
 
     return res.json({
       success: true,
-    })
-    
+    });
   } catch (err) {
     res.json({
       success: false,
@@ -71,17 +115,19 @@ PostRouter.post("/like", async (req, res) => {
 PostRouter.get("/post/:postId", async (req, res) => {
   const { postId } = req.params;
   try {
-    const singlePost = await Post.findById(postId, "userId image likes date description comments")
+    const singlePost = await Post.findById(
+      postId,
+      "userId image likes date description comments"
+    );
     return res.json({
       success: true,
       singlePost,
-    })
-  } catch(err){
+    });
+  } catch (err) {
     res.json({
       success: false,
-    })
+    });
   }
-})
-
+});
 
 module.exports = PostRouter;
