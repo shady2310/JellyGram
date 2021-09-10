@@ -25,7 +25,7 @@ PostRouter.get("/explore", async (req, res) => {
 
 //NUEVO POST
 
-PostRouter.post("/newpost", (req, res) => {
+PostRouter.post("/newPost", (req, res) => {
   try {
     // const id = req.params.id;
     // console.log(req.files);
@@ -87,7 +87,35 @@ PostRouter.post("/newpost", (req, res) => {
     //   post: newPost,
     // });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+// ELIMINAR POSTS
+
+PostRouter.post("/deletePost", (req, res) => {
+  try {
+    const { public_id } = req.body;
+    if (!public_id) {
+      return res.status(400).json({
+        success: false,
+        message: "No se han seleccionado imagenes",
+      });
+    }
+
+    cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
+      if(err) throw err;
+      res.json({
+        success: true,
+        message: "Imagen eliminada",
+      })
+    })
+    
+  } catch (err) {
+    return res.status(500).json({
       success: false,
       message: err.message,
     });
