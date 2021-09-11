@@ -100,34 +100,34 @@ PostRouter.post("/deletePost/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const { public_id, postId } = req.body;
-    // if (!public_id) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "No se han seleccionado imagenes",
-    //   });
-    // }
+    if (!public_id) {
+      return res.status(400).json({
+        success: false,
+        message: "No se han seleccionado imagenes",
+      });
+    }
 
     let postDeleted = await Post.findByIdAndDelete(postId);
     let comentarios = postDeleted.comments;
-    let comentarioDeleted = comentarios.asyncForEach(async (commentId) => {
+    let idComentario = postDeleted._id;
+    // console.log(postDeleted);
+
+    let eliminarIdUser = await User.findByIdAndUpdate(id, {
+      $pull: { posts: idComentario },
+    });
+    let comentarioDeleted = comentarios.forEach(async (commentId) => {
+      // console.log(commentId);
       await Comment.findByIdAndDelete(commentId);
-      console.log(commentId);
+    });
+
+    cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
+      if (err) throw err;
     });
 
     res.json({
-      postDeleted,
-      comentarioDeleted,
+      success: true,
+      message: "Post eliminado correctamente",
     });
-
-    // }
-    // cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
-    //   if (err) throw err;
-
-    //   res.json({
-    //     success: true,
-    //     message: "Imagen eliminada",
-    //   });
-    // });
   } catch (err) {
     return res.status(500).json({
       success: false,
