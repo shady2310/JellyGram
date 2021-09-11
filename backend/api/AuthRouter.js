@@ -70,7 +70,7 @@ AuthRouter.post("/login", async (req, res) => {
   }
   try {
     if (await bcrypt.compare(password, user.password)) {
-      jwt.sign({ id: user._id }, tokenWord, { expiresIn: 3600 });
+      const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: 3600 });
       res.json({
         success: true,
         message: "Te has logueado correctamente",
@@ -82,8 +82,11 @@ AuthRouter.post("/login", async (req, res) => {
         message: "Correo o contraseña incorrectos",
       });
     }
-  } catch {
-    res.status(500).send();
+  } catch(err) {
+    res.status(500).json({
+      sucess: false,
+      message: err.message,
+    });
   }
 });
 
