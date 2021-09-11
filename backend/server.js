@@ -4,12 +4,6 @@ const app = express();
 const fileupload = require("express-fileupload");
 const mongoose = require("mongoose");
 
-app.use(
-  fileupload({
-    useTempFiles: true,
-  })
-);
-
 // const moment = require("moment");
 
 // Routers require
@@ -37,8 +31,14 @@ mongoose
     console.log(err);
   });
 
+/////// Dependencies use
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  fileupload({
+    useTempFiles: true,
+  })
+);
 
 
 // Routers use

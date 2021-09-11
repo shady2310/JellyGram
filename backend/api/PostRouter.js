@@ -25,9 +25,10 @@ PostRouter.get("/explore", async (req, res) => {
 
 //NUEVO POST
 
-PostRouter.post("/newPost", (req, res) => {
+PostRouter.post("/newPost/:id", (req, res) => {
   try {
-    // const id = req.params.id;
+    const id = req.params.id;
+    const { description } = req.body;
     // console.log(req.files);
 
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -38,9 +39,7 @@ PostRouter.post("/newPost", (req, res) => {
     }
 
     let imagen = req.files.imagen;
-    console.log(imagen);
-
-    // const { description } = req.body;
+    // console.log(imagen);
 
     if (imagen.size > 1024 * 1024 * 2) {
       removeTmp(imagen.tempFilePath);
@@ -64,28 +63,27 @@ PostRouter.post("/newPost", (req, res) => {
       async (err, result) => {
         if (err) throw err;
         removeTmp(imagen.tempFilePath);
-        res.json({
-          public_id: result.public_id,
-          url: result.secure_url,
+        // res.json({
+        //   public_id: result.public_id,
+        //   url: result.secure_url,
+        // });
+        let post = new Post({
+          image: result.secure_url,
+          description,
+        });
+
+        let newPost = await post.save();
+
+        let userPost = await User.findByIdAndUpdate(id, {
+          $push: { posts: newPost._id },
+        });
+
+        return res.json({
+          success: true,
+          post: newPost,
         });
       }
     );
-
-    // let post = new Post({
-    //   image,
-    //   description,
-    // });
-
-    // let newPost = await post.save();
-
-    // let userPost = await User.findByIdAndUpdate(id, {
-    //   $push: { posts: newPost._id },
-    // });
-
-    // return res.json({
-    //   success: true,
-    //   post: newPost,
-    // });
   } catch (err) {
     return res.status(500).json({
       success: false,
@@ -107,13 +105,12 @@ PostRouter.post("/deletePost", (req, res) => {
     }
 
     cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
-      if(err) throw err;
+      if (err) throw err;
       res.json({
         success: true,
         message: "Imagen eliminada",
-      })
-    })
-    
+      });
+    });
   } catch (err) {
     return res.status(500).json({
       success: false,
