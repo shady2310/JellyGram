@@ -23,7 +23,7 @@ CommentRouter.post("/newComment/:id", async (req, res) => {
   return res.json({
     success: true,
     comment: newComment,
-    commentPost,
+    // commentPost,
   });
 });
 
