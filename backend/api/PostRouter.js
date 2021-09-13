@@ -15,7 +15,7 @@ cloudinary.config({
 });
 
 //EXPLORAR TODAS LAS PUBLICACIONES
-
+/// TODO: poner bien
 PostRouter.get("/explore", async (req, res) => {
   let posts = await Post.find({});
   return res.json({

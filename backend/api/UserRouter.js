@@ -2,18 +2,40 @@ const express = require("express");
 require("dotenv").config();
 const User = require("../models/User");
 const Storie = require("../models/Storie");
+const Post = require("../models/Post");
 const UserRouter = express.Router();
-
 
 // TODO: Añadir los errores
 
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
 // TODO: YO y mis usuarios seguidos
-UserRouter.get("/", async (req, res) => {
-  let users = await User.find({});
+UserRouter.get("/home/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id, "username following photo");
+  const followingIds = user.following;
+  // console.log(followingIds);
+
+  let usersIds = [];
+  followingIds.forEach(async (userIds) => {
+    usersIds.push(userIds);
+  });
+  
+  console.log(usersIds);
+  
+  
+
+
+  let users = await User.findById(userIds, "username posts");
+  let posts = users.posts.forEach(async (post) => {
+    console.log(post);
+  });
+  let postsImages = await Post.findById(users.posts)
+
+  console.log(postsImages);
+
   return res.json({
     success: true,
-    users,
+    user,
   });
 });
 
@@ -66,11 +88,11 @@ UserRouter.get("/settings/:id", async (req, res) => {
 UserRouter.put("/settings/:id", async (req, res) => {
   const { id } = req.params;
   const { fullname, gender, username, photo, email } = req.body;
-  if (!fullname || !gender || !username || !email){
+  if (!fullname || !gender || !username || !email) {
     return res.json({
       success: false,
-      message: "No puedes dejar datos en blanco"
-    })
+      message: "No puedes dejar datos en blanco",
+    });
   }
   await User.findByIdAndUpdate(id, {
     fullname,
@@ -133,8 +155,6 @@ UserRouter.get("/myProfile/:id", async (req, res) => {
     myProfile,
   });
 });
-
-
 
 //INFORMACION GENERAL DEL PERFIL PARA OTRO USER
 UserRouter.get("/profile/:id", async (req, res) => {
