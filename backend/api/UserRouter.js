@@ -3,6 +3,7 @@ require("dotenv").config();
 const User = require("../models/User");
 const Storie = require("../models/Storie");
 const Post = require("../models/Post");
+const ObjectId = require('mongoose').Types.ObjectId;
 const UserRouter = express.Router();
 
 // TODO: Añadir los errores
@@ -11,32 +12,75 @@ const UserRouter = express.Router();
 // TODO: YO y mis usuarios seguidos
 UserRouter.get("/home/:id", async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id, "username following photo");
-  const followingIds = user.following;
+  // const user = await User.findById(id, "username following photo");
+  // const followingIds = user.following;
   // console.log(followingIds);
 
-  let usersIds = [];
-  followingIds.forEach(async (userIds) => {
-    usersIds.push(userIds);
-  });
-  
-  console.log(usersIds);
-  
-  
+  const user = await User.findById(id, "username following photo");
+  if (!user) {
+    return res.status(404).send({ error: "Could not find user." });
+  }
+  const following = user.following.map((following) => following);
 
+  // console.log(user);
+  // console.log(following);
 
-  let users = await User.findById(userIds, "username posts");
-  let posts = users.posts.forEach(async (post) => {
-    console.log(post);
-  });
-  let postsImages = await Post.findById(users.posts)
+  const posts = await Post.aggregate([
+    {
+      $match: {
+        $or: [{ userId: { $in: following } }, { userId: ObjectId(user._id) }],
+      },
+    },
+    { $sort: { date: -1 } },
+    { $skip: Number() },
+    { $limit: 5 },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    // {
+    //   $lookup: {
+    //     from: "posts",
+    //     localField: "_id",
+    //     foreignField: "post",
+    //     as: "post",
+    //   },
+    // },
+  ]);
+  return res.send(posts);
 
-  console.log(postsImages);
+  console.log(posts);
 
-  return res.json({
-    success: true,
-    user,
-  });
+  // let usersIds = [];
+  // followingIds.forEach((userIds) => {
+  //   usersIds.push(userIds);
+  // });
+  // // console.log(followingIds);
+  // console.log(usersIds);
+  // let usersInfo = [];
+  // usersIds.forEach((userId) => {
+  //   let info = User.findById(userId, "username posts");
+  //   usersInfo.push(info);
+  //   // console.log(info);
+  // });
+
+  // console.log(usersInfo.schema);
+
+  // let posts = users.posts.forEach(async (post) => {
+  //   console.log(post);
+  // });
+  // let postsImages = await Post.findById(users.posts)
+
+  // console.log(postsImages);
+
+  // return res.json({
+  //   success: true,
+  //   user,
+  // });
 });
 
 //////////////////////////////////////////////////////////////// Buscar USER by Username ////////////////////////////////////////////////////////////////
