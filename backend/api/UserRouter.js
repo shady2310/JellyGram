@@ -3,7 +3,7 @@ require("dotenv").config();
 const User = require("../models/User");
 const Storie = require("../models/Storie");
 const Post = require("../models/Post");
-const ObjectId = require('mongoose').Types.ObjectId;
+const ObjectId = require("mongoose").Types.ObjectId;
 const UserRouter = express.Router();
 
 // TODO: Añadir los errores
@@ -24,36 +24,45 @@ UserRouter.get("/home/:id", async (req, res) => {
 
   // console.log(user);
   // console.log(following);
-
-  const posts = await Post.aggregate([
-    {
-      $match: {
-        $or: [{ userId: { $in: following } }, { userId: ObjectId(user._id) }],
+  try {
+    const posts = await Post.aggregate([
+      {
+        $match: {
+          $expr: {
+            $or: [{ userId: { $in: [following, "$following"]} }, { userId: { id } }],
+          },
+        },
       },
-    },
-    { $sort: { date: -1 } },
-    { $skip: Number() },
-    { $limit: 5 },
-    {
-      $lookup: {
-        from: "users",
-        localField: "userId",
-        foreignField: "_id",
-        as: "user",
-      },
-    },
-    // {
-    //   $lookup: {
-    //     from: "posts",
-    //     localField: "_id",
-    //     foreignField: "post",
-    //     as: "post",
-    //   },
-    // },
-  ]);
-  return res.send(posts);
-
-  console.log(posts);
+      // {
+      //   $match: {
+      //     $or: [{ userId: { $in: following } }, { userId: { id } }],
+      //   },
+      // },
+      // { $sort: { date: -1 } },
+      // { $skip: Number() },
+      // { $limit: 5 },
+      // {
+      //   $lookup: {
+      //     from: "users",
+      //     localField: "userId",
+      //     foreignField: "_id",
+      //     as: "user",
+      //   },
+      // },
+      // {
+      //   $lookup: {
+      //     from: "posts",
+      //     localField: "_id",
+      //     foreignField: "post",
+      //     as: "post",
+      //   },
+      // },
+    ]);
+    // console.log(posts);
+    return res.send(posts);
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 
   // let usersIds = [];
   // followingIds.forEach((userIds) => {
