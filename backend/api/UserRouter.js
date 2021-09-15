@@ -3,7 +3,7 @@ require("dotenv").config();
 const User = require("../models/User");
 const Storie = require("../models/Storie");
 const Post = require("../models/Post");
-const ObjectId = require("mongoose").Types.ObjectId;
+const mongoose = require("mongoose");
 const UserRouter = express.Router();
 
 // TODO: Añadir los errores
@@ -12,25 +12,27 @@ const UserRouter = express.Router();
 // TODO: YO y mis usuarios seguidos
 UserRouter.get("/home/:id", async (req, res) => {
   const { id } = req.params;
-  // const user = await User.findById(id, "username following photo");
-  // const followingIds = user.following;
-  // console.log(followingIds);
 
   const user = await User.findById(id, "username following photo");
   if (!user) {
     return res.status(404).send({ error: "Could not find user." });
   }
-  const following = user.following.map((following) => following);
+  const following = user.following.map((followingId) =>
+    mongoose.Types.ObjectId(followingId)
+  );
 
   // console.log(user);
-  // console.log(following);
+
   try {
+    console.log(following);
+    // console.log(ObjectId("613f32797362a02d34cc31ce"));
+    // let test = await Post.find({ userId: "613f363ba28a04606c808472" });
+    // console.log(test);
+
     const posts = await Post.aggregate([
       {
         $match: {
-          $expr: {
-            $or: [{ userId: { $in: [following, "$following"]} }, { userId: { id } }],
-          },
+          $or: [{ userId: { $in: following } }, { userId: { id } }],
         },
       },
       // {
@@ -59,6 +61,7 @@ UserRouter.get("/home/:id", async (req, res) => {
       // },
     ]);
     // console.log(posts);
+    // return res.send(posts);
     return res.send(posts);
   } catch (err) {
     res.json({ success: false, message: err.message });

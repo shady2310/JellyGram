@@ -10,16 +10,16 @@ const Auth = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, process.env.TOKEN_WORD, (error, user) => {
-    console.log(error);
+  jwt.verify(token, process.env.TOKEN_WORD, (error, decoded) => {
+    // console.log(error);
 
     if (error) {
       return res.status(400).json({
         success: false,
         message: "Invalid Authentication",
       });
-    } else {
-      req.user = user;
+    } else {     
+      req.body.userId = decoded.id;
       next();
     }
   });

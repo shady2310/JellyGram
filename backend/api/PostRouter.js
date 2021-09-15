@@ -27,6 +27,9 @@ PostRouter.get("/explore", async (req, res) => {
 //NUEVO POST
 
 PostRouter.post("/newPost/:id", (req, res) => {
+  //token 
+  // console.log(req.body);
+  
   try {
     const id = req.params.id;
     const { description } = req.body;
@@ -71,6 +74,7 @@ PostRouter.post("/newPost/:id", (req, res) => {
         let post = new Post({
           image: result.secure_url,
           imageId: result.public_id,
+          userId: id,
           description,
         });
 
