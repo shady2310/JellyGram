@@ -23,11 +23,22 @@ UserRouter.get("/home/:id", async (req, res) => {
 
   // console.log(user);
 
+  const camposOmitidosAutor = [
+    "author.password",
+    "author.email",
+    "author.links",
+    "author.followers",
+    "author.following",
+    "author.gender",
+    "author.fullname",
+    "author.savedposts",
+    "author.dateofbirth",
+    "author.stories",
+    "author.posts",
+  ];
+
   try {
-    console.log(following);
-    // console.log(ObjectId("613f32797362a02d34cc31ce"));
-    // let test = await Post.find({ userId: "613f363ba28a04606c808472" });
-    // console.log(test);
+    // console.log(following);
 
     const posts = await Post.aggregate([
       {
@@ -35,64 +46,59 @@ UserRouter.get("/home/:id", async (req, res) => {
           $or: [{ userId: { $in: following } }, { userId: { id } }],
         },
       },
-      // {
-      //   $match: {
-      //     $or: [{ userId: { $in: following } }, { userId: { id } }],
-      //   },
-      // },
-      // { $sort: { date: -1 } },
+      { $sort: { date: -1 } },
       // { $skip: Number() },
-      // { $limit: 5 },
-      // {
-      //   $lookup: {
-      //     from: "users",
-      //     localField: "userId",
-      //     foreignField: "_id",
-      //     as: "user",
-      //   },
-      // },
-      // {
-      //   $lookup: {
-      //     from: "posts",
-      //     localField: "_id",
-      //     foreignField: "post",
-      //     as: "post",
-      //   },
-      // },
+      { $limit: 5 },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "author",
+        },
+      },
+      {
+        $unset: camposOmitidosAutor,
+      },
+      {
+        $lookup: {
+          from: "comments",
+          let: { postId: "$_id" },
+          pipeline: [
+            {
+              // Comentarios relacionados con el postId
+              $match: {
+                $expr: {
+                  $eq: ["$post", "$$postId"],
+                },
+              },
+            },
+            { $sort: { date: -1 } },
+            { $limit: 3 },
+            // Populating del autor del comment
+            {
+              $lookup: {
+                from: "users",
+                localField: "userId",
+                foreignField: "_id",
+                as: "author",
+              },
+            },
+            {
+              $unwind: "$author",
+            },
+            {
+              $unset: camposOmitidosAutor,
+            },
+          ],
+          as: "comments",
+        },
+      },
     ]);
-    // console.log(posts);
-    // return res.send(posts);
     return res.send(posts);
   } catch (err) {
     res.json({ success: false, message: err.message });
   }
-
-  // let usersIds = [];
-  // followingIds.forEach((userIds) => {
-  //   usersIds.push(userIds);
-  // });
-  // // console.log(followingIds);
-  // console.log(usersIds);
-  // let usersInfo = [];
-  // usersIds.forEach((userId) => {
-  //   let info = User.findById(userId, "username posts");
-  //   usersInfo.push(info);
-  //   // console.log(info);
-  // });
-
-  // console.log(usersInfo.schema);
-
-  // let posts = users.posts.forEach(async (post) => {
-  //   console.log(post);
-  // });
-  // let postsImages = await Post.findById(users.posts)
-
-  // console.log(postsImages);
-
-  // return res.json({
-  //   success: true,
-  //   user,
-  // });
 });
 
 //////////////////////////////////////////////////////////////// Buscar USER by Username ////////////////////////////////////////////////////////////////

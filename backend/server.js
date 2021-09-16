@@ -43,7 +43,7 @@ app.use(
 // Routers use
 app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
-app.use("/post", Auth, PostRouter);
+app.use("/post", PostRouter);
 app.use("/comment", CommentRouter);
 
 app.listen(PORT, () => {

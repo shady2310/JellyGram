@@ -12,6 +12,7 @@ CommentRouter.post("/newComment/:id", async (req, res) => {
   let comentario = new Comment({
     userId,
     comment,
+    post: id,
   });
 
   let newComment = await comentario.save();
