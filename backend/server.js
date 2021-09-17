@@ -42,9 +42,9 @@ app.use(
 
 // Routers use
 app.use("/auth", AuthRouter);
-app.use("/user", UserRouter);
-app.use("/post", PostRouter);
-app.use("/comment", CommentRouter);
+app.use("/user", Auth, UserRouter);
+app.use("/post", Auth, PostRouter);
+app.use("/comment", Auth, CommentRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} sucessfully`);

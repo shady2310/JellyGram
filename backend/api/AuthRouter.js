@@ -38,7 +38,7 @@ AuthRouter.post("/register", async (req, res) => {
 
     let newUser = await user.save();
 
-    const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: 3600 });
+    const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "2h" });
 
     return res.json({
       success: true,
@@ -70,7 +70,7 @@ AuthRouter.post("/login", async (req, res) => {
   }
   try {
     if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "7d" });
+      const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "2h" });
       res.json({
         success: true,
         message: "Te has logueado correctamente",

@@ -10,8 +10,8 @@ const UserRouter = express.Router();
 
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
 // TODO: YO y mis usuarios seguidos
-UserRouter.get("/home/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/home", async (req, res) => {
+  const id  = req.body.userId;
 
   const user = await User.findById(id, "username following photo");
   if (!user) {
@@ -104,7 +104,7 @@ UserRouter.get("/home/:id", async (req, res) => {
 //////////////////////////////////////////////////////////////// Buscar USER by Username ////////////////////////////////////////////////////////////////
 
 UserRouter.get("/searchUser", async (req, res) => {
-  // const { id } = req.params;
+  // const id  = req.body.userId;
   const { username } = req.body;
   let users = await User.find(
     { username: { $regex: username, $options: "i" } },
@@ -135,8 +135,8 @@ UserRouter.get("/searchUser", async (req, res) => {
 
 //INFO DEL USUARIO
 
-UserRouter.get("/settings/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/settings", async (req, res) => {
+  const id  = req.body.userId;
   let userInfo = await User.findById(
     id,
     "fullname gender username photo email"
@@ -147,8 +147,8 @@ UserRouter.get("/settings/:id", async (req, res) => {
 });
 
 // CAMBIO DE DATOS
-UserRouter.put("/settings/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.put("/settings", async (req, res) => {
+  const id  = req.body.userId;
   const { fullname, gender, username, photo, email } = req.body;
   if (!fullname || !gender || !username || !email) {
     return res.json({
@@ -171,9 +171,9 @@ UserRouter.put("/settings/:id", async (req, res) => {
 
 // CAMBIO DE CONTRASEÑA
 
-UserRouter.put("/settings/password/:id", async (req, res) => {
+UserRouter.put("/settings/password", async (req, res) => {
   // TODO: Encriptar contraseña
-  const { id } = req.params;
+  const id  = req.body.userId;
   const { password } = req.body;
   await User.findByIdAndUpdate(id, { password });
   res.json({
@@ -184,8 +184,8 @@ UserRouter.put("/settings/password/:id", async (req, res) => {
 
 // ENLACES
 
-UserRouter.put("/settings/links/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.put("/settings/links", async (req, res) => {
+  const id  = req.body.userId;
   const { link } = req.body;
   let usuario = await User.findByIdAndUpdate(
     id,
@@ -206,8 +206,8 @@ UserRouter.put("/settings/links/:id", async (req, res) => {
 // TODO: RUTA PARA MI PERFIL CON EL TOKEN
 
 // Mi perfil
-UserRouter.get("/myProfile/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/myProfile", async (req, res) => {
+  const id  = req.body.userId;
   const myProfile = await User.findById(
     id,
     "username photo followers following"
@@ -219,8 +219,8 @@ UserRouter.get("/myProfile/:id", async (req, res) => {
 });
 
 //INFORMACION GENERAL DEL PERFIL PARA OTRO USER
-UserRouter.get("/profile/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/profile", async (req, res) => {
+  const id  = req.body.userId;
   const userProfile = await User.findById(
     id,
     "username photo followers following"
@@ -271,8 +271,8 @@ UserRouter.post("/follow", async (req, res) => {
 
 // USERS QUE SIGUES
 
-UserRouter.get("/following/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/following", async (req, res) => {
+  const id  = req.body.userId;
 
   let following = await User.findById(id, "following");
 
@@ -284,8 +284,8 @@ UserRouter.get("/following/:id", async (req, res) => {
 
 //POSTS DEL USUARIO
 
-UserRouter.get("/profile/posts/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/profile/posts", async (req, res) => {
+  const id  = req.body.userId;
   const posts = await User.findById(id, "posts");
   res.json({
     success: true,
@@ -295,8 +295,8 @@ UserRouter.get("/profile/posts/:id", async (req, res) => {
 
 // POST GUARDADOS
 
-UserRouter.get("/profile/saved/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/profile/saved", async (req, res) => {
+  const id  = req.body.userId;
   const savedpost = await User.findById(id, "savedpost");
   res.json({
     success: true,
@@ -306,8 +306,8 @@ UserRouter.get("/profile/saved/:id", async (req, res) => {
 
 //ENLACES DEL PERFIL
 
-UserRouter.get("/profile/links/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/profile/links", async (req, res) => {
+  const id  = req.body.userId;
   const links = await User.findById(id, "links");
   res.json({
     success: true,
@@ -319,8 +319,8 @@ UserRouter.get("/profile/links/:id", async (req, res) => {
 
 // HISTORIAS DEL USUARIO
 
-UserRouter.get("/stories/:id", async (req, res) => {
-  const { id } = req.params;
+UserRouter.get("/stories", async (req, res) => {
+  const id  = req.body.userId;
   const stories = await User.findById(id, "stories");
   res.json({
     success: true,

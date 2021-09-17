@@ -5,8 +5,8 @@ const CommentRouter = express.Router();
 
 //NUEVO COMENTARIO
 
-CommentRouter.post("/newComment/:id", async (req, res) => {
-  const { id } = req.params;
+CommentRouter.post("/newComment", async (req, res) => {
+  const id  = req.body.userId;
   const { comment, userId } = req.body;
 
   let comentario = new Comment({

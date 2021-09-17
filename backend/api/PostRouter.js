@@ -26,12 +26,9 @@ PostRouter.get("/explore", async (req, res) => {
 
 //NUEVO POST
 
-PostRouter.post("/newPost/:id", (req, res) => {
-  //token 
-  // console.log(req.body);
-  
+PostRouter.post("/newPost", (req, res) => {
   try {
-    const id = req.params.id;
+    const id  = req.body.userId;
     const { description } = req.body;
     // console.log(req.files);
 
@@ -100,9 +97,9 @@ PostRouter.post("/newPost/:id", (req, res) => {
 
 // ELIMINAR POSTS
 
-PostRouter.post("/deletePost/:id", async (req, res) => {
+PostRouter.post("/deletePost", async (req, res) => {
   try {
-    const id = req.params.id;
+    const id  = req.body.userId;
     const { public_id, postId } = req.body;
     if (!public_id) {
       return res.status(400).json({
