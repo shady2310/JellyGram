@@ -7,12 +7,12 @@ const CommentRouter = express.Router();
 
 CommentRouter.post("/newComment", async (req, res) => {
   const id  = req.body.userId;
-  const { comment, userId } = req.body;
-
+  const { comment, postId } = req.body;
+// TODO: arreglar id
   let comentario = new Comment({
     userId,
     comment,
-    post: id,
+    post: postId,
   });
 
   let newComment = await comentario.save();

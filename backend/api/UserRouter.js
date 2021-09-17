@@ -6,6 +6,9 @@ const Post = require("../models/Post");
 const mongoose = require("mongoose");
 const UserRouter = express.Router();
 
+const bcrypt = require("bcrypt");
+const salt = bcrypt.genSaltSync(10);
+
 // TODO: Añadir los errores
 
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
@@ -174,7 +177,8 @@ UserRouter.put("/settings", async (req, res) => {
 UserRouter.put("/settings/password", async (req, res) => {
   // TODO: Encriptar contraseña
   const id  = req.body.userId;
-  const { password } = req.body;
+  let { password } = req.body;
+  password = bcrypt.hashSync(password, salt);
   await User.findByIdAndUpdate(id, { password });
   res.json({
     success: true,
