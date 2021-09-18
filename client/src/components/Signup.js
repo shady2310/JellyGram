@@ -7,13 +7,26 @@ const Signup = () => {
       <h2>Sign up</h2>
       <form>
         <label>
-          Name:
-          <input type="text" name="name" />
+          Nombre:
+          <input type="text" name="fullname" />
+        </label>
+        <label>
+          Username:
+          <input type="text" name="username" />
+        </label>
+        <label>
+          Email:
+          <input type="text" name="email" />
+        </label>
+        <label>
+          Password:
+          <input type="text" name="password" />
         </label>
         <input type="submit" value="Submit" />
       </form>
     </div>
   );
 };
+
 
 export default Signup;
