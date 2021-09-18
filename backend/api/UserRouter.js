@@ -14,7 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
 // TODO: YO y mis usuarios seguidos
 UserRouter.get("/home", async (req, res) => {
-  const id  = req.body.userId;
+  const id = req.body.userId;
 
   const user = await User.findById(id, "username following photo");
   if (!user) {
@@ -109,28 +109,32 @@ UserRouter.get("/home", async (req, res) => {
 UserRouter.get("/searchUser", async (req, res) => {
   // const id  = req.body.userId;
   const { username } = req.body;
-  let users = await User.find(
-    { username: { $regex: username, $options: "i" } },
-    "username photo"
-  );
+  try {
+    let users = await User.find(
+      { username: { $regex: username, $options: "i" } },
+      "username photo"
+    );
 
-  if (!username) {
-    return res.json({
-      success: false,
-      message: "Debes introducir un nombre de usuario",
-    });
-  }
+    if (!username) {
+      return res.json({
+        success: false,
+        message: "Debes introducir un nombre de usuario",
+      });
+    }
 
-  if (users == 0) {
-    return res.json({
-      success: false,
-      message: "No se han econtrado usuarios",
-    });
-  } else {
-    return res.json({
-      success: true,
-      users,
-    });
+    if (users == 0) {
+      return res.json({
+        success: false,
+        message: "No se han econtrado usuarios",
+      });
+    } else {
+      return res.json({
+        success: true,
+        users,
+      });
+    }
+  } catch (err) {
+    res.json({ success: false, message: err.message });
   }
 });
 
@@ -139,71 +143,90 @@ UserRouter.get("/searchUser", async (req, res) => {
 //INFO DEL USUARIO
 
 UserRouter.get("/settings", async (req, res) => {
-  const id  = req.body.userId;
-  let userInfo = await User.findById(
-    id,
-    "fullname gender username photo email"
-  );
-  res.json({
-    userInfo,
-  });
+  const id = req.body.userId;
+
+  try {
+    let userInfo = await User.findById(
+      id,
+      "fullname gender username photo email"
+    );
+    res.json({
+      userInfo,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 // CAMBIO DE DATOS
 UserRouter.put("/settings", async (req, res) => {
-  const id  = req.body.userId;
+  const id = req.body.userId;
   const { fullname, gender, username, photo, email } = req.body;
-  if (!fullname || !gender || !username || !email) {
-    return res.json({
-      success: false,
-      message: "No puedes dejar datos en blanco",
+
+  try {
+    if (!fullname || !gender || !username || !email) {
+      return res.json({
+        success: false,
+        message: "No puedes dejar datos en blanco",
+      });
+    }
+    await User.findByIdAndUpdate(id, {
+      fullname,
+      gender,
+      username,
+      photo,
+      email,
     });
+    res.json({
+      success: true,
+      message: "Datos actualizados correctamente",
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
   }
-  await User.findByIdAndUpdate(id, {
-    fullname,
-    gender,
-    username,
-    photo,
-    email,
-  });
-  res.json({
-    success: true,
-    message: "Datos actualizados correctamente",
-  });
 });
 
 // CAMBIO DE CONTRASEÑA
 
 UserRouter.put("/settings/password", async (req, res) => {
-  // TODO: Encriptar contraseña
-  const id  = req.body.userId;
+  const id = req.body.userId;
   let { password } = req.body;
-  password = bcrypt.hashSync(password, salt);
-  await User.findByIdAndUpdate(id, { password });
-  res.json({
-    success: true,
-    message: "Contraseña cambiada correctamente",
-  });
+
+  try {
+    password = bcrypt.hashSync(password, salt);
+    await User.findByIdAndUpdate(id, { password });
+    res.json({
+      success: true,
+      message: "Contraseña cambiada correctamente",
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 // ENLACES
 
 UserRouter.put("/settings/links", async (req, res) => {
-  const id  = req.body.userId;
+  const id = req.body.userId;
   const { link } = req.body;
-  let usuario = await User.findByIdAndUpdate(
-    id,
-    { $push: { links: link } },
-    {
-      new: true,
-    }
-  );
 
-  res.json({
-    success: true,
-    message: "Enlaces cambiados correctamente",
-    usuario,
-  });
+  try {
+    let usuario = await User.findByIdAndUpdate(
+      id,
+      { $push: { links: link } },
+      {
+        new: true,
+      }
+    );
+
+    res.json({
+      success: true,
+      message: "Enlaces cambiados correctamente",
+      usuario,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 //////////////////////////////////////////////////////////////// PERFIL ////////////////////////////////////////////////////////////////
@@ -211,28 +234,36 @@ UserRouter.put("/settings/links", async (req, res) => {
 
 // Mi perfil
 UserRouter.get("/myProfile", async (req, res) => {
-  const id  = req.body.userId;
-  const myProfile = await User.findById(
-    id,
-    "username photo followers following"
-  );
-  res.json({
-    success: true,
-    myProfile,
-  });
+  const id = req.body.userId;
+  try {
+    const myProfile = await User.findById(
+      id,
+      "username photo followers following"
+    );
+    res.json({
+      success: true,
+      myProfile,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 //INFORMACION GENERAL DEL PERFIL PARA OTRO USER
 UserRouter.get("/profile", async (req, res) => {
-  const id  = req.body.userId;
-  const userProfile = await User.findById(
-    id,
-    "username photo followers following"
-  );
-  res.json({
-    success: true,
-    userProfile,
-  });
+  const id = req.body.userId;
+  try {
+    const userProfile = await User.findById(
+      id,
+      "username photo followers following"
+    );
+    res.json({
+      success: true,
+      userProfile,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 // FOLLOW / UNFOLLOW A USUARIO
@@ -269,49 +300,61 @@ UserRouter.post("/follow", async (req, res) => {
 
     res.json({ success: true });
   } catch (err) {
-    res.json({ success: false, err });
+    res.json({ success: false, message: err.message });
   }
 });
 
 // USERS QUE SIGUES
 
 UserRouter.get("/following", async (req, res) => {
-  const id  = req.body.userId;
+  const id = req.body.userId;
 
-  let following = await User.findById(id, "following");
+  try {
+    let following = await User.findById(id, "following");
 
-  res.json({
-    success: true,
-    following,
-  });
+    res.json({
+      success: true,
+      following,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 //POSTS DEL USUARIO
 
 UserRouter.get("/profile/posts", async (req, res) => {
-  const id  = req.body.userId;
-  const posts = await User.findById(id, "posts");
-  res.json({
-    success: true,
-    posts,
-  });
+  const id = req.body.userId;
+  try {
+    const posts = await User.findById(id, "posts");
+    res.json({
+      success: true,
+      posts,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 // POST GUARDADOS
 
 UserRouter.get("/profile/saved", async (req, res) => {
-  const id  = req.body.userId;
-  const savedpost = await User.findById(id, "savedpost");
-  res.json({
-    success: true,
-    savedpost,
-  });
+  const id = req.body.userId;
+  try {
+    const savedpost = await User.findById(id, "savedpost");
+    res.json({
+      success: true,
+      savedpost,
+    });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
 });
 
 //ENLACES DEL PERFIL
 
 UserRouter.get("/profile/links", async (req, res) => {
-  const id  = req.body.userId;
+  const id = req.body.userId;
   const links = await User.findById(id, "links");
   res.json({
     success: true,
@@ -324,7 +367,7 @@ UserRouter.get("/profile/links", async (req, res) => {
 // HISTORIAS DEL USUARIO
 
 UserRouter.get("/stories", async (req, res) => {
-  const id  = req.body.userId;
+  const id = req.body.userId;
   const stories = await User.findById(id, "stories");
   res.json({
     success: true,
