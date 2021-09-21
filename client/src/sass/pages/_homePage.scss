@@ -1,0 +1,30 @@
+.contenedor_titulo {
+  text-align: center;
+  padding-top: 1rem;
+  & h1 {
+    color: $color-white;
+    font: {
+      family: $fTitulos;
+      size: 3.6rem;
+    }
+
+    span {
+      color: $color-blue;
+    }
+  }
+}
+
+.container-logo_home {
+    // display: grid;
+    // gap: 1rem;
+    // grid-auto-rows: 22rem;
+    // grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    img{
+        grid-column: span 2;
+        width: 50%;
+    }
+}
