@@ -13,8 +13,12 @@ const Home = () => {
         <img src={logo} alt="logo"/>
       </div> */}
       <div className="nav-container-home">
-        <Link to="/signup" className="nav-home link-white">Sing up</Link>
-        <Link to="/login" className="nav-home link-white">Login</Link>
+        <Link to="/signup" className="nav-home link-white">
+          Sing up
+        </Link>
+        <Link to="/login" className="nav-home link-white">
+          Login
+        </Link>
       </div>
     </div>
   );
