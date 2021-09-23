@@ -28,3 +28,17 @@
         width: 50%;
     }
 }
+
+.nav-container-home{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1rem;
+  gap: 1rem;
+}
+
+.nav-home{
+  font: {
+    family: $fBody;
+    size: 2rem;
+  }
+}

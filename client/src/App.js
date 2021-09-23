@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage/HomePage";
 import Signup from "./components/Auth/Signup";
 import Login from "./components/Auth/Login";
 
@@ -8,7 +8,7 @@ const App = () => {
     <div className="App">
       <Switch>
         <Route
-          path="/" exact component={Home}
+          path="/" exact component={HomePage}
         ></Route>
         <Route
           path="/signup" exact component={Signup}
