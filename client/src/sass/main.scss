@@ -1,7 +1,8 @@
-@import "./others/typography";
+@import "./others/breakpoints";
 @import "./others/variables";
 
-@import "./base/utilities";
 @import "./base/base";
+@import "./others/typography";
+@import "./base/utilities";
 
 @import "./pages/homePage";
