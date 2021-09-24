@@ -1,0 +1,31 @@
+@mixin button-bg($bg) {
+  background: $bg;
+  &:hover {
+    background: darken($bg, 8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background: darken($bg, 25%);
+  }
+}
+
+.btn {
+  text-decoration: none;
+  border: none;
+  padding: 0.5rem 3.3rem;
+  border: none;
+  border-radius: 1rem;
+  font: {
+    size: 1.5rem;
+    family: $fBody;
+    color: $color-black;
+    weight: 800;
+  }
+  color: $color-black;
+  background-color: $color-white;
+}
+
+.btn-black {
+  @include button-bg(#242424);
+  color: $color-white;
+}

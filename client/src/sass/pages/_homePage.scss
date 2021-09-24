@@ -1,6 +1,7 @@
 .contenedor_titulo {
   text-align: center;
   padding-top: 1rem;
+  padding-bottom: 3rem;
   & h1 {
     color: $color-white;
     font: {
@@ -22,7 +23,8 @@
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 2rem;
+  // align-items: center;
   .logo-home-phone {
     // grid-column: span 2;
     width: 80%;
@@ -30,7 +32,7 @@
 
   @include large {
     .logo-home-phone {
-      width: 60%;
+      width: 30%;
     }
   }
 }
@@ -53,13 +55,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  margin-top: 10rem;
-  gap: 1rem;
-
-  h3 {
-    font: {
-      size: 1.8rem;
-    }
-  }
+  margin-top: 3rem;
 }

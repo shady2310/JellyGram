@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo-conjunto.svg";
+import cardBorder from "../../assets/img/card-border.svg";
+import LoginCard from "../../components/Auth/LoginCard";
+
 const Home = () => {
   return (
     <div>
@@ -9,29 +12,21 @@ const Home = () => {
         </h1>
       </div>
       <div className="container-logo_home">
-        <img src={logo} alt="logo" className="logo-home-phone"/>
+        <img src={logo} alt="logo" className="logo-home-phone" />
       </div>
-      <div className="nav-container-home">
+      {/* <div className="nav-container-home">
         <Link to="/signup" className="nav-home link-white">
           Sing up
         </Link>
         <Link to="/login" className="nav-home link-white">
           Login
         </Link>
-      </div>
+      </div> */}
       <main className="container-home">
-        <h3 className="text-center color-white">
-          Conecta con amigos, comparte lo que haces !
-        </h3>
-        <div>
-          <button>Iniciar Sesión</button>
+        <div className="container-card">
+          <LoginCard />
+          {/* <img src={cardBorder} alt="card-border" /> */}
         </div>
-        <div>
-          <button>Registrarse</button>
-        </div>
-        <h3 className="text-center color-white">
-          Se tu mismo, comienza a compartir
-        </h3>
       </main>
       {/* <footer>
         <p>&copy; 2021 JellyGram </p>

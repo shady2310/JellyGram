@@ -1,8 +1,15 @@
 @import "./others/breakpoints";
 @import "./others/variables";
+@import "./others/mixins";
 
 @import "./base/base";
 @import "./others/typography";
 @import "./base/utilities";
+
+// COMPONENTES
+
+@import "./components/loginCard";
+
+// PAGINAS
 
 @import "./pages/homePage";
