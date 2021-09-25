@@ -3,6 +3,7 @@ require("dotenv").config();
 const app = express();
 const fileupload = require("express-fileupload");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 // const moment = require("moment");
 
@@ -32,6 +33,7 @@ mongoose
   });
 
 /////// Dependencies use
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -45,6 +47,10 @@ app.use("/auth", AuthRouter);
 app.use("/user", Auth, UserRouter);
 app.use("/post", Auth, PostRouter);
 app.use("/comment", Auth, CommentRouter);
+
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Contenido que devolvemos" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} sucessfully`);

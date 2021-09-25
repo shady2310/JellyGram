@@ -16,26 +16,25 @@ AuthRouter.post("/register", async (req, res) => {
     let { fullname, dateofbirth, gender, username, photo, email, password } =
       req.body;
 
-    password = bcrypt.hashSync(password, salt);
+    // if(!fullname || !dateofbirth || !gender || !username || !email || !password){
+    if (!fullname || !username || !email || !password) {
+      return res.json({
+        success: false,
+        message: "Debes completar todos los datos marcados con un *",
+      });
+    }
 
     let regex =
       /^(([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|es|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b))$/;
 
     if (email.match(regex)) {
-    } else {
       return res.json({
         success: false,
         message: "Email no valido",
       });
     }
 
-    // if(!fullname || !dateofbirth || !gender || !username || !email || !password){
-    if (!fullname || !gender || !username || !email || !password) {
-      return res.json({
-        success: false,
-        message: "Debes completar todos los datos marcados con un *",
-      });
-    }
+    password = bcrypt.hashSync(password, salt);
 
     let user = new User({
       fullname,

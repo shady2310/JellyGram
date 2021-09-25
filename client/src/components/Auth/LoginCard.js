@@ -36,6 +36,12 @@ const Login = () => {
           <div>o</div>
           <div></div>
         </div>
+        <div>
+          <a href="/" className="link-black">¿Has olvidado la contraseña?</a>
+        </div>
+        <div>
+          <Link to="/signup">Registrarse</Link>
+        </div>
       </main>
     </div>
   );
