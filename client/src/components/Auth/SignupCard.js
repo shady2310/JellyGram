@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+  });
   const [message, setMessage] = useState({
     text: "",
   });
+
 
   const handleChange = (event) => {
     setValues((prevValues) => ({
@@ -100,6 +102,7 @@ const Signup = () => {
           <input type="submit" value="Submit" className="btn btn-black" />
           <span>{message.text}</span>
         </form>
+
       </main>
     </div>
   );

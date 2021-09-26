@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo-conjunto.svg";
 import cardBorder from "../../assets/img/card-border.svg";
 import SignupCard from "../../components/Auth/SignupCard";
+import SignUp from "../../components/SignUpForm/Signup";
+
 
 const Signup = () => {
   return (
@@ -24,7 +26,8 @@ const Signup = () => {
       </div> */}
       <main className="container-home">
         <div className="container-card">
-          <SignupCard />
+        <SignUp></SignUp>
+          {/* <SignupCard /> */}
           {/* <img src={cardBorder} alt="card-border" /> */}
         </div>
       </main>
