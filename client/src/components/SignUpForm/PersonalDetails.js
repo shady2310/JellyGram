@@ -20,9 +20,11 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
           onChange={handleChange("username")}
         />
       </label> */}
-      <div>
-        <label>
-          Fecha de nacimiento:
+      <form action="">
+        <div>
+          <div>
+            <label>Fecha de nacimiento:</label>
+          </div>
           <input
             type="date"
             name="dateofbirth"
@@ -30,10 +32,14 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
             onChange={handleChange("dateofbirth")}
             className="input-signup"
           />
-        </label>
-      </div>
-      <button onClick={Previous}>Previous</button>
-      <button onClick={Continue}>Next</button>
+        </div>
+        <button className="btn btn-black" onClick={Previous}>
+          Atras
+        </button>
+        <button className="btn btn-black" onClick={Continue}>
+          Siguiente
+        </button>
+      </form>
     </div>
   );
 };

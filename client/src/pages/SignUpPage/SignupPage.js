@@ -7,7 +7,7 @@ import SignUp from "../../components/SignUpForm/Signup";
 
 const Signup = () => {
   return (
-    <div>
+    <div className="container-home">
       <div className="contenedor_titulo">
         <h1>
           Jelly<span>Gram</span>
@@ -24,8 +24,8 @@ const Signup = () => {
           Login
         </Link>
       </div> */}
-      <main className="container-home">
-        <div className="container-card">
+      <main className="signup-card">
+        <div className="container-signup">
         <SignUp></SignUp>
           {/* <SignupCard /> */}
           {/* <img src={cardBorder} alt="card-border" /> */}
