@@ -4,10 +4,9 @@ import cardBorder from "../../assets/img/card-border.svg";
 import SignupCard from "../../components/Auth/SignupCard";
 import SignUp from "../../components/SignUpForm/Signup";
 
-
 const Signup = () => {
   return (
-    <div className="container-home">
+    <div>
       <div className="contenedor_titulo">
         <h1>
           Jelly<span>Gram</span>
@@ -24,16 +23,18 @@ const Signup = () => {
           Login
         </Link>
       </div> */}
-      <main className="signup-card">
-        <div className="container-signup">
-        <SignUp></SignUp>
-          {/* <SignupCard /> */}
-          {/* <img src={cardBorder} alt="card-border" /> */}
-        </div>
-      </main>
-      {/* <footer>
+      <div className="container-home">
+        <main className="signup-card">
+          <div className="container-signup">
+            <SignUp></SignUp>
+            {/* <SignupCard /> */}
+            {/* <img src={cardBorder} alt="card-border" /> */}
+          </div>
+          {/* <footer>
         <p>&copy; 2021 JellyGram </p>
       </footer> */}
+        </main>
+      </div>
     </div>
   );
 };

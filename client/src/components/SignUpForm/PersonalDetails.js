@@ -1,4 +1,5 @@
 import React from "react";
+import tarta from "../../assets/img/tarta.svg";
 
 const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
   const Previous = (e) => {
@@ -20,10 +21,14 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
           onChange={handleChange("username")}
         />
       </label> */}
+      <img src={tarta} alt="tarta" />
       <form action="">
         <div>
           <div>
-            <label>Fecha de nacimiento:</label>
+            <label>Añade tu fecha de nacimiento</label>
+          </div>
+          <div>
+            <p>Este dato no se incluirá en tu perfil público.</p>
           </div>
           <input
             type="date"

@@ -40,7 +40,7 @@ const Login = () => {
           <a href="/" className="link-black">¿Has olvidado la contraseña?</a>
         </div>
         <div>
-          <Link to="/signup">Registrarse</Link>
+          <Link to="/signup" className="link-blue">Registrarse</Link>
         </div>
       </main>
     </div>

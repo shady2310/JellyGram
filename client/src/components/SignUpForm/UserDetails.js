@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UserDetails = ({ nextStep, handleChange, values }) => {
   const Continue = (e) => {
@@ -63,6 +64,17 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
           Siguiente
         </button>
       </form>
+      <div className="divisor-form">
+          <div></div>
+          <div>o</div>
+          <div></div>
+        </div>
+        <div>
+          <p className="color-black">¿Ya tienes cuenta?</p>
+        </div>
+        <div>
+          <Link to="/" className="link-blue">Iniciar Sesión</Link>
+        </div>
     </div>
   );
 };
