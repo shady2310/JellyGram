@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import Confirmation from "../SignUpForm/Confirmation"
+import axios from "axios";
 import PersonalDetails from "../SignUpForm/PersonalDetails"
 import Success from "../SignUpForm/Success"
 import UserDetails from "../SignUpForm/UserDetails"
+import Avatar from "../SignUpForm/Avatar"
+
 
 export default class Signup extends Component {
   state = {
@@ -33,6 +35,25 @@ export default class Signup extends Component {
     this.setState({ [input]: e.target.value });
   };
 
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(values);
+    const response = await axios.post(
+      `http://localhost:5000/auth/register`,
+      this.state
+    );
+    console.log(response.data);
+    // if (response.data.success === "true") {
+    //   window.localStorage.token = response.data.token;
+    // } else {
+    //   setMessage({
+    //     text: response.data.message,
+    //   });
+    // }
+  };
+  
+  
   render() {
     const { step } = this.state;
     const {
@@ -52,11 +73,11 @@ export default class Signup extends Component {
         return <UserDetails nextStep={this.nextStep} handleChange={this.handleChange} values={values}/>;
       case 2:
         console.log(values);
-        return <PersonalDetails prevStep={this.prevStep} handleChange={this.handleChange} values={values}/>;
-    //   case 3:
-    //     return <Confirmation prevStep={this.prevStep} handleChange={this.handleChange} values={values}/>;
-    //   case 4:
-    //     return <Success />;
+        return <PersonalDetails prevStep={this.prevStep} nextStep={this.nextStep} handleChange={this.handleChange} values={values}/>;
+      case 3:
+        return <Avatar prevStep={this.prevStep} nextStep={this.nextStep} handleChange={this.handleChange} values={values}/>;
+      case 4:
+        return <Success handleSubmit/>;
       default:
       // nada
     }

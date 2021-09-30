@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
-const Success = () => {
-    return (
-        <div>
-            <h1>Hello</h1>
-        </div>
-    )
-}
+const Success = (handleSubmit) => {
+  return (
+    <div>
+      <h1>Hello</h1>
+      <form onSubmit={handleSubmit}>
+        <button >enviar</button>
+      </form>
+    </div>
+  );
+};
 
-export default Success
+export default Success;

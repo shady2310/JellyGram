@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const UserDetails = ({ nextStep, handleChange, values }) => {
-  const Continue = (e) => {
-    e.preventDefault();
-    nextStep();
-  };
+const UserDetails = ({ nextStep, handleChange}) => {
+  // const Continue = (e) => {
+  //   e.preventDefault();
+  //   nextStep();
+  // };
   return (
     <div className="container-signup">
       {/* <label>
@@ -17,13 +17,13 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
           onChange={handleChange("email")}
         />
       </label> */}
-      <form action="">
+      <form>
         <div>
           <input
             type="email"
             name="email"
-            value={values.email}
-            onChange={handleChange("email")}
+            // value={values}
+            onChange={handleChange}
             className="input-signup"
             placeholder="Correo electronico"
           />
@@ -32,8 +32,8 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
           <input
             type="text"
             name="fullname"
-            value={values.fullname}
-            onChange={handleChange("fullname")}
+            // value={values}
+            onChange={handleChange}
             className="input-signup"
             placeholder="Nombre completo"
           />
@@ -43,8 +43,8 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
           <input
             type="text"
             name="username"
-            value={values.username}
-            onChange={handleChange("username")}
+            // value={values.username}
+            onChange={handleChange}
             className="input-signup"
             placeholder="Nombre de usuario"
           />
@@ -54,13 +54,13 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
           <input
             type="password"
             name="password"
-            value={values.password}
-            onChange={handleChange("password")}
+            // value={values.password}
+            onChange={handleChange}
             className="input-signup"
             placeholder="Contraseña"
           />
         </div>
-        <button className="btn btn-black" onClick={Continue}>
+        <button className="btn btn-black" onClick={nextStep}>
           Siguiente
         </button>
       </form>

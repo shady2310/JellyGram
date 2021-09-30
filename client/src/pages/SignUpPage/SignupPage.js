@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo-conjunto.svg";
 import cardBorder from "../../assets/img/card-border.svg";
 import SignupCard from "../../components/Auth/SignupCard";
-import SignUp from "../../components/SignUpForm/Signup";
+import SignUp from "../../components/Auth/SignupCard";
 
 const Signup = () => {
   return (

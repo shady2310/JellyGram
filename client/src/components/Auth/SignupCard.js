@@ -1,14 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import UserDetails from "../SignUpForm/UserDetails";
+import PersonalDetails from "../SignUpForm/PersonalDetails";
 
 const Signup = () => {
+  const [step, setStep] = useState({
+    step: 1,
+  });
   const [values, setValues] = useState({
   });
   const [message, setMessage] = useState({
     text: "",
   });
 
+  //Paso atras
+  // console.log(values.step);
+  
+  const prevStep = () => {
+    setStep({ step: step.step - 1 });
+  };
+
+  //Siguiente paso
+  const nextStep = () => {
+    setStep({ step: step.step + 1 });
+  };
 
   const handleChange = (event) => {
     setValues((prevValues) => ({
@@ -34,14 +50,26 @@ const Signup = () => {
       });
     }
   };
+  console.log(values)
+  
+
+  
+
+  const hola = 0;
 
   return (
+    
     <div className="signup-card">
+      {console.log(step.step)}
       <Link to="/">Home</Link>
       {/* <Link to="/login">Login</Link> */}
       {/* <h2>Sign up</h2> */}
       <main className="container-signup">
-        <form onSubmit={handleSubmit}>
+        El usuario esta {hola ? "esta" : "no esta"} logueado
+        { step.step === 1 ? <UserDetails nextStep={nextStep} handleChange={handleChange}  /> : <div></div>}
+        { step.step === 2 ? <PersonalDetails prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} /> : <div></div>}
+        
+        {/* <form onSubmit={handleSubmit}>
           <div>
             <input
               type="email"
@@ -101,8 +129,7 @@ const Signup = () => {
           </div>
           <input type="submit" value="Submit" className="btn btn-black" />
           <span>{message.text}</span>
-        </form>
-
+        </form> */}
       </main>
     </div>
   );

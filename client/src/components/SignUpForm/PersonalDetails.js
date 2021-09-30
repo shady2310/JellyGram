@@ -1,15 +1,16 @@
 import React from "react";
 import tarta from "../../assets/img/tarta.svg";
 
-const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
-  const Previous = (e) => {
-    e.preventDefault();
-    prevStep();
-  };
-  const Continue = (e) => {
-    e.preventDefault();
-    nextStep();
-  };
+const PersonalDetails = ({ prevStep, nextStep, handleChange}) => {
+// const PersonalDetails = () => {
+  // const Previous = (e) => {
+  //   e.preventDefault();
+  //   prevStep();
+  // };
+  // const Continue = (e) => {
+  //   e.preventDefault();
+  //   nextStep();
+  // };
   return (
     <div>
       {/* <label>
@@ -22,7 +23,7 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
         />
       </label> */}
       <img src={tarta} alt="tarta" />
-      <form action="">
+      <form>
         <div>
           <div>
             <label>Añade tu fecha de nacimiento</label>
@@ -33,18 +34,18 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
           <input
             type="date"
             name="dateofbirth"
-            value={values.dateofbirth}
-            onChange={handleChange("dateofbirth")}
-            className="input-signup"
+            // value={values.dateofbirth}
+            onChange={handleChange}
+            // className="input-signup"
           />
         </div>
-        <button className="btn btn-black" onClick={Previous}>
-          Atras
-        </button>
-        <button className="btn btn-black" onClick={Continue}>
-          Siguiente
-        </button>
       </form>
+      <button className="btn btn-black" onClick={prevStep}>
+        Atras
+      </button>
+      <button className="btn btn-black" onClick={nextStep}>
+        Siguiente
+      </button>
     </div>
   );
 };
