@@ -3,20 +3,23 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import UserDetails from "../SignUpForm/UserDetails";
 import PersonalDetails from "../SignUpForm/PersonalDetails";
+import SubirFoto from "../../assets/img/subir-foto.svg";
 
 const Signup = () => {
+  const [img, setImg] = useState({
+    img: SubirFoto,
+  });
+  const imagen = img.img;
+
   const [step, setStep] = useState({
     step: 1,
   });
-  const [values, setValues] = useState({
-  });
+  const [values, setValues] = useState({});
   const [message, setMessage] = useState({
     text: "",
   });
 
   //Paso atras
-  // console.log(values.step);
-  
   const prevStep = () => {
     setStep({ step: step.step - 1 });
   };
@@ -31,8 +34,24 @@ const Signup = () => {
       ...prevValues,
       [event.target.name]: event.target.value,
     }));
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImg({ img: reader.result });
+      }
+    };
+    reader.readAsDataURL(event.target.files[0]);
   };
-  // console.log(values);
+
+  // const handleImage = (event) => {
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     if (reader.readyState === 2) {
+  //       setImg({ img: reader.result });
+  //     }
+  //   };
+  //   reader.readAsDataURL(event.target.files[0]);
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,86 +69,76 @@ const Signup = () => {
       });
     }
   };
-  console.log(values)
-  
-
-  
-
-  const hola = 0;
+  console.log(values);
 
   return (
-    
     <div className="signup-card">
-      {console.log(step.step)}
-      <Link to="/">Home</Link>
+      {/* {console.log(step.step)} */}
       {/* <Link to="/login">Login</Link> */}
       {/* <h2>Sign up</h2> */}
-      <main className="container-signup">
-        El usuario esta {hola ? "esta" : "no esta"} logueado
-        { step.step === 1 ? <UserDetails nextStep={nextStep} handleChange={handleChange}  /> : <div></div>}
-        { step.step === 2 ? <PersonalDetails prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} /> : <div></div>}
-        
-        {/* <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              className="input-signup"
-              placeholder="Correo electronico"
-            />
+      <main>
+        {step.step === 1 ? (
+          <UserDetails nextStep={nextStep} handleChange={handleChange} />
+        ) : (
+          <div></div>
+        )}
+        {step.step === 2 ? (
+          <PersonalDetails
+            prevStep={prevStep}
+            nextStep={nextStep}
+            handleChange={handleChange}
+          />
+        ) : (
+          <div></div>
+        )}
+        {step.step === 3 ? (
+          <div className="container-signup">
+            {/* <img src={SubirFoto} alt="subirFoto" className="foto-registro" /> */}
+            <form onSubmit={handleSubmit}>
+              <h4 className="texto-inicio mb-lg text-center">
+                Imagen de perfil
+              </h4>
+              <div>
+                <img
+                  src={imagen}
+                  alt="userImage"
+                  className="user-image"
+                  // id="userImage"
+                />
+                <input
+                  type="file"
+                  name="photo"
+                  id="input"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+                <label htmlFor="input" className="custom-file-upload mt-lg">Seleccionar imagen</label>
+                {/* <label for="file-upload" class="custom-file-upload">
+                Seleccionar imagen
+                </label> */}
+                <input
+                  id="file-upload"
+                  type="file"
+                  name="photo"
+                  onChange={handleChange}
+                  className="custom-file-upload"
+                />
+              </div>
+              <div className="mt-lg flex-botones-separados">
+                <button className="btn btn-black btn-signup" onClick={prevStep}>
+                  Atras
+                </button>
+                <input
+                  type="submit"
+                  value="Terminar"
+                  className="btn btn-black btn-signup"
+                />
+              </div>
+            </form>
           </div>
-          <div>
-            <input
-              type="text"
-              name="fullname"
-              onChange={handleChange}
-              className="input-signup"
-              placeholder="Nombre completo"
-            />
-          </div>
-
-          <div>
-            <input
-              type="text"
-              name="username"
-              onChange={handleChange}
-              className="input-signup"
-              placeholder="Nombre de usuario"
-            />
-          </div>
-
-          <div>
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              className="input-signup"
-              placeholder="Contraseña"
-            />
-          </div>
-          <h3>step 2</h3>
-          <div>
-            <label>
-              Fecha de nacimiento:
-              <input
-                type="date"
-                name="dateofbirth"
-                onChange={handleChange}
-                className="input-signup"
-              />
-            </label>
-          </div>
-          <h3>step 3</h3>
-          <div>
-            <label>
-              Foto de perfil:
-              <input type="file" name="photo" onChange={handleChange} />
-            </label>
-          </div>
-          <input type="submit" value="Submit" className="btn btn-black" />
-          <span>{message.text}</span>
-        </form> */}
+        ) : (
+          <div></div>
+        )}
       </main>
     </div>
   );

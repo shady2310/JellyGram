@@ -17,7 +17,7 @@ const UserDetails = ({ nextStep, handleChange}) => {
           onChange={handleChange("email")}
         />
       </label> */}
-      <form>
+      <div className="container-inputs">
         <div>
           <input
             type="email"
@@ -60,20 +60,22 @@ const UserDetails = ({ nextStep, handleChange}) => {
             placeholder="Contraseña"
           />
         </div>
-        <button className="btn btn-black" onClick={nextStep}>
+        <div className="mt-lg flex-column-center">
+        <button className="btn btn-black btn-signup" onClick={nextStep}>
           Siguiente
         </button>
-      </form>
+        </div>
+      </div>
       <div className="divisor-form">
           <div></div>
           <div>o</div>
           <div></div>
         </div>
         <div>
-          <p className="color-black">¿Ya tienes cuenta?</p>
+          <p className="color-black texto-inicio">¿Ya tienes cuenta?</p>
         </div>
         <div>
-          <Link to="/" className="link-blue">Iniciar Sesión</Link>
+          <Link to="/" className="link-blue texto-inicio">Iniciar Sesión</Link>
         </div>
     </div>
   );

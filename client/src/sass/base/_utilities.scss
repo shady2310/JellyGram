@@ -66,3 +66,26 @@
   color: $color-blue;
   text-decoration: none;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  // align-content: center;
+  align-items: center;
+}
+
+.flex-botones-separados{
+  display: flex;
+  flex-direction: column;
+  // align-content: center;
+  align-items: center;
+  gap: 1rem;
+}

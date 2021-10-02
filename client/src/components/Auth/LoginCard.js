@@ -37,10 +37,10 @@ const Login = () => {
           <div></div>
         </div>
         <div>
-          <a href="/" className="link-black">¿Has olvidado la contraseña?</a>
+          <a href="/" className="link-black texto-inicio">¿Has olvidado la contraseña?</a>
         </div>
         <div>
-          <Link to="/signup" className="link-blue">Registrarse</Link>
+          <Link to="/signup" className="link-blue texto-inicio">Registrarse</Link>
         </div>
       </main>
     </div>

@@ -4,7 +4,7 @@
   align-items: center;
   background-color: $color-white;
   border-radius: 3rem;
-  height: 50vh;
+  height: 47vh;
   width: 80vw;
   max-width: 350px;
   margin-top: 3rem;
@@ -29,9 +29,57 @@
   }
 }
 
-.input-signup {
-    padding: 0.5rem 2rem;
-    border-radius: 1rem;
-    border: none;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+.container-inputs {
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
   }
+  div:last-child {
+    margin-top: 3rem;
+  }
+}
+
+.input-signup {
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.texto-inicio {
+  font-size: 1.6rem;
+}
+.texto-inicio2 {
+  font-size: 1.4rem;
+  color: #242424c9;
+}
+
+.btn-signup {
+  min-width: 20rem;
+}
+
+//////////////////////////////// STEP 3
+
+.foto-registro {
+  max-width: 50%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid $color-black;
+  display: inline-block;
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+}
+
+.user-image{
+  height: 15rem;
+  border-radius: 1rem;
+}
