@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import UserDetails from "../SignUpForm/UserDetails";
 import PersonalDetails from "../SignUpForm/PersonalDetails";
@@ -29,11 +28,14 @@ const Signup = () => {
     setStep({ step: step.step + 1 });
   };
 
-  const handleChange = (event) => {
+  function handleChange(event) {
     setValues((prevValues) => ({
       ...prevValues,
       [event.target.name]: event.target.value,
     }));
+  }
+
+  function handleImage(event) {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -41,17 +43,7 @@ const Signup = () => {
       }
     };
     reader.readAsDataURL(event.target.files[0]);
-  };
-
-  // const handleImage = (event) => {
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       setImg({ img: reader.result });
-  //     }
-  //   };
-  //   reader.readAsDataURL(event.target.files[0]);
-  // };
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -110,9 +102,14 @@ const Signup = () => {
                   name="photo"
                   id="input"
                   accept="image/*"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleImage(e);
+                    handleChange(e);
+                  }}
                 />
-                <label htmlFor="input" className="custom-file-upload mt-lg">Seleccionar imagen</label>
+                <label htmlFor="input" className="custom-file-upload mt-lg">
+                  Seleccionar imagen
+                </label>
                 {/* <label for="file-upload" class="custom-file-upload">
                 Seleccionar imagen
                 </label> */}

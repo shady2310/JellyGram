@@ -1,20 +1,19 @@
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignupPage from "./pages/SignUpPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage";
-import Signup from "./pages/SignUpPage/SignupPage";
-
+import Test from "./components/session";
 
 const App = () => {
   return (
-    <div className="App">
+    <Router>
       <Switch>
-        <Route
-          path="/" exact component={HomePage}
-        ></Route>
-        <Route
-          path="/signup" exact component={Signup}
-        ></Route>
+        <Route exact path="/" component={LoginPage}></Route>
+        <Route exact path="/signup" component={SignupPage}></Route>
+        <Route exact path="/home" component={HomePage}></Route>
+        <Route exact path="/test" component={() => <Test authorized={false} />}></Route>
       </Switch>
-    </div>
+    </Router>
   );
 };
 

@@ -1,17 +1,51 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
 
 const Login = () => {
+  const [values, setValues] = useState({});
+  const [message, setMessage] = useState({
+    text: "",
+  });
+
+  const handleChange = (event) => {
+    setValues((prevValues) => ({
+      ...prevValues,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(values);
+    const response = await axios.post(
+      `http://localhost:5000/auth/login`,
+      values
+    );
+    console.log(response.data);
+    if (response.data.success === "true") {
+      window.localStorage.token = response.data.token;
+    } else {
+      setMessage({
+        text: response.data.message,
+      });
+    }
+  };
+
+  console.log(values);
+
   return (
     <div className="login-card">
       {/* <Link to="/">Home</Link>
       <Link to="/signup">Sing up</Link> */}
       <main className="container-login">
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <div>
             <input
               type="email"
               name="email"
               placeholder="Correo electrónico"
+              onChange={handleChange}
               className="input-login"
             ></input>
           </div>
@@ -19,6 +53,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
+              onChange={handleChange}
               placeholder="Contraseña"
               className="input-login"
             ></input>
@@ -37,10 +72,14 @@ const Login = () => {
           <div></div>
         </div>
         <div>
-          <a href="/" className="link-black texto-inicio">¿Has olvidado la contraseña?</a>
+          <a href="/" className="link-black texto-inicio">
+            ¿Has olvidado la contraseña?
+          </a>
         </div>
         <div>
-          <Link to="/signup" className="link-blue texto-inicio">Registrarse</Link>
+          <Link to="/signup" className="link-blue texto-inicio">
+            Registrarse
+          </Link>
         </div>
       </main>
     </div>
