@@ -6,7 +6,7 @@ import SignUp from "../../components/Auth/SignupCard";
 
 const Signup = () => {
   return (
-    <div>
+    <div className="contenedor-signup">
       <div className="contenedor_titulo">
         <h1>
           Jelly<span>Gram</span>

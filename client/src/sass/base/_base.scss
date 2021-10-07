@@ -1,4 +1,4 @@
-$negro: #242424;
+$blanco: #f4f4f4;
 // Global app config
 *,
 *::after,
@@ -14,5 +14,5 @@ html {
 
 body {
   box-sizing: border-box;
-  background-color: $negro;
+  background-color: $blanco;
 }

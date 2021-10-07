@@ -5,7 +5,7 @@ import LoginCard from "../../components/Auth/LoginCard";
 
 const Home = () => {
   return (
-    <div>
+    <div className="contenedor-login">
       <div className="contenedor_titulo">
         <h1>
           Jelly<span>Gram</span>

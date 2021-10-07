@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({});
@@ -35,53 +35,55 @@ const Login = () => {
   console.log(values);
 
   return (
-    <div className="login-card">
-      {/* <Link to="/">Home</Link>
+    <div>
+      <div className="login-card">
+        {/* <Link to="/">Home</Link>
       <Link to="/signup">Sing up</Link> */}
-      <main className="container-login">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Correo electrónico"
-              onChange={handleChange}
-              className="input-login"
-            ></input>
+        <main className="container-login">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Correo electrónico"
+                onChange={handleChange}
+                className="input-login"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="Contraseña"
+                className="input-login"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="submit"
+                value="Iniciar Sesión"
+                className="btn btn-black"
+              />
+            </div>
+          </form>
+          <div className="divisor-form">
+            <div></div>
+            <div>o</div>
+            <div></div>
           </div>
           <div>
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              placeholder="Contraseña"
-              className="input-login"
-            ></input>
+            <a href="/" className="link-black texto-inicio">
+              ¿Has olvidado la contraseña?
+            </a>
           </div>
           <div>
-            <input
-              type="submit"
-              value="Iniciar Sesión"
-              className="btn btn-black"
-            />
+            <Link to="/signup" className="link-blue texto-inicio">
+              Registrarse
+            </Link>
           </div>
-        </form>
-        <div className="divisor-form">
-          <div></div>
-          <div>o</div>
-          <div></div>
-        </div>
-        <div>
-          <a href="/" className="link-black texto-inicio">
-            ¿Has olvidado la contraseña?
-          </a>
-        </div>
-        <div>
-          <Link to="/signup" className="link-blue texto-inicio">
-            Registrarse
-          </Link>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

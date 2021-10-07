@@ -1,0 +1,18 @@
+.mobileNav{
+    background-color: $color-black;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    
+    div{
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.mobileNavLink{
+    text-decoration: none;
+    color: #fff;
+    font-size: 17px;
+}

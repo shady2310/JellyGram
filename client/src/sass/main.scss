@@ -8,9 +8,12 @@
 
 // COMPONENTES
 
-@import "./components/loginCard";
-@import "./components/signupCard";
+@import "./components/LoginCard/loginCard";
+@import "./components/SignupCard/signupCard";
+@import "./components/MobileNav/MobileNav";
+@import "./components/MobileHeader/mobileHeader";
 
 // PAGINAS
 
-@import "./pages/homePage";
+@import "./pages/loginPage";
+@import "./pages/signupPage";
