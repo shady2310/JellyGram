@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as NavLink } from "react-router-dom";
+import { BiHomeAlt, BiMessageSquareAdd, BiUser, BiHeart, BiSearch } from "react-icons/bi";
 
 const MobileNav = () => {
   return (
@@ -7,23 +8,23 @@ const MobileNav = () => {
       <nav className="mobileNav">
         <div>
           <NavLink to="/home" className="mobileNavLink">
-            Home
+            <BiHomeAlt />
           </NavLink>
 
           <NavLink to="/" className="mobileNavLink">
-            Search
+            <BiSearch />
           </NavLink>
 
           <NavLink to="/" className="mobileNavLink">
-            Upload
+            <BiMessageSquareAdd />
           </NavLink>
 
           <NavLink to="/" className="mobileNavLink">
-            Activity
+            <BiHeart />
           </NavLink>
 
           <NavLink to="/" className="mobileNavLink">
-            Profile
+            <BiUser/>
           </NavLink>
         </div>
       </nav>

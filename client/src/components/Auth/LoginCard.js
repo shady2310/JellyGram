@@ -1,8 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
+  // let history = useHistory();
+  // history.push("/home")
+  
   const [values, setValues] = useState({});
   const [message, setMessage] = useState({
     text: "",
@@ -23,7 +26,7 @@ const Login = () => {
       values
     );
     console.log(response.data);
-    if (response.data.success === "true") {
+    if (response.data.success === true) {
       window.localStorage.token = response.data.token;
     } else {
       setMessage({

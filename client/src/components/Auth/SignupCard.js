@@ -53,7 +53,7 @@ const Signup = () => {
       values
     );
     console.log(response.data);
-    if (response.data.success === "true") {
+    if (response.data.success === true) {
       window.localStorage.token = response.data.token;
     } else {
       setMessage({
