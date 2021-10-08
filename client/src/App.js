@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { IconContext } from "react-icons"
 
-
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignUpPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage";
@@ -13,9 +13,12 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          <Route exact path="/" component={LoginPage}></Route>
+          <Route exact path="/login" component={LoginPage}></Route>
           <Route exact path="/signup" component={SignupPage}></Route>
-          <Route exact path="/home" component={() => <HomePage authorized={false} />}></Route>
+          {/* <Route exact path="/" component={HomePage}></Route> */}
+          {/* <Route exact path="/home" component={() => <HomePage authorized={true} />}></Route> */}
+          <ProtectedRoute exact path="/" component={HomePage} />
+          {/* <ProtectedRoute exact path="/" component={HomePage} isAuth={true} /> */}
         </Switch>
       </Router>
     </div>

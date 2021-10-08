@@ -14,6 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
 // TODO: YO y mis usuarios seguidos
 UserRouter.get("/home", async (req, res) => {
+  
   const id = req.body.userId;
 
   const user = await User.findById(id, "username following photo");

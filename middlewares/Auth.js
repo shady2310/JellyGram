@@ -2,12 +2,21 @@ const jwt = require("jsonwebtoken");
 
 const Auth = (req, res, next) => {
   let token = req.headers.token;
+  // console.log(req.headers);
+
+  // console.log(token);
+  // console.log(req.headers.token);
 
   if (!token) {
-    return res.status(400).json({
+    // console.log("middle");
+    return res.json({
       success: false,
       message: "Token not provided",
     });
+    // res.status(400).json({
+    //   success: false,
+    //   message: "Token not provided",
+    // });
   }
 
   jwt.verify(token, process.env.TOKEN_WORD, (error, decoded) => {

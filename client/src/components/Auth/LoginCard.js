@@ -3,8 +3,9 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
-  // let history = useHistory();
-  // history.push("/home")
+  window.localStorage.token = "";
+  let history = useHistory();
+  
   
   const [values, setValues] = useState({});
   const [message, setMessage] = useState({
@@ -26,6 +27,7 @@ const Login = () => {
       values
     );
     console.log(response.data);
+    
     if (response.data.success === true) {
       window.localStorage.token = response.data.token;
     } else {
@@ -67,6 +69,7 @@ const Login = () => {
                 type="submit"
                 value="Iniciar Sesión"
                 className="btn btn-black"
+                // onClick={() => {history.push("/")}}
               />
             </div>
           </form>

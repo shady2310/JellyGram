@@ -7,7 +7,7 @@ const MobileNav = () => {
     <div>
       <nav className="mobileNav">
         <div>
-          <NavLink to="/home" className="mobileNavLink">
+          <NavLink to="/login" className="mobileNavLink">
             <BiHomeAlt />
           </NavLink>
 
