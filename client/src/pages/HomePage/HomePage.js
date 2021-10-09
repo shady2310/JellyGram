@@ -18,22 +18,10 @@ const HomePage = () => {
         token: window.localStorage.token,
       },
     });
-    // let response = await fetch("http://localhost:5000/user/home", {
-    //   method: "GET",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     token: window.localStorage.token,
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     return result;
-    //   });
-    console.log(response);
-    // setInfo({
-    //   data: response.data,
-    // });
+    // console.log(response.data);
+    setInfo({
+      data: response.data,
+    });
   };
 
   useEffect(() => {
@@ -49,10 +37,13 @@ const HomePage = () => {
   return (
     <div>
       <MobileHeader />
-      {/* {info.data.map((posts) => {
-          return <MobilePosts data={posts} />
+
+      <div>
+        {info.data.map((posts) => {
+          return <MobilePosts key={posts._id} data={posts} />;
         })}
-       */}
+      </div>
+
       <MobileNav />
     </div>
   );

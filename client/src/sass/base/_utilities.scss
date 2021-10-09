@@ -82,10 +82,18 @@
   align-items: center;
 }
 
-.flex-botones-separados{
+.flex-botones-separados {
   display: flex;
   flex-direction: column;
   // align-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+.err {
+  color: #242424;
+  font-size: 1.2rem;
+}
+.err:empty {
+  display: none;
 }

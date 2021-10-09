@@ -20,7 +20,7 @@ AuthRouter.post("/register", async (req, res) => {
     if (!fullname || !username || !email || !password) {
       return res.json({
         success: false,
-        message: "Debes completar todos los datos marcados con un *",
+        message: "Debes completar todos los campos",
       });
     }
 
@@ -49,7 +49,7 @@ AuthRouter.post("/register", async (req, res) => {
 
     let newUser = await user.save();
 
-    const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "2h" });
+    const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "1h" });
 
     return res.json({
       success: true,
@@ -74,14 +74,14 @@ AuthRouter.post("/login", async (req, res) => {
   });
 
   if (!user || !password) {
-    return res.status(404).json({
+    return res.json({
       sucess: false,
-      message: "Debes introducir un email y una contraseña",
+      message: "Debes introducir un email y una contraseña validos",
     });
   }
   try {
     if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "2h" });
+      const token = jwt.sign({ id: user._id }, tokenWord, { expiresIn: "1h" });
       res.json({
         success: true,
         message: "Te has logueado correctamente",

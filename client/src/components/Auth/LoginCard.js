@@ -5,8 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 const Login = () => {
   window.localStorage.token = "";
   let history = useHistory();
-  
-  
+
   const [values, setValues] = useState({});
   const [message, setMessage] = useState({
     text: "",
@@ -27,9 +26,11 @@ const Login = () => {
       values
     );
     console.log(response.data);
-    
+
     if (response.data.success === true) {
+      localStorage.removeItem("token");
       window.localStorage.token = response.data.token;
+      history.push("/");
     } else {
       setMessage({
         text: response.data.message,
@@ -72,7 +73,9 @@ const Login = () => {
                 // onClick={() => {history.push("/")}}
               />
             </div>
+            <span className="err">{message.text}</span>
           </form>
+
           <div className="divisor-form">
             <div></div>
             <div>o</div>

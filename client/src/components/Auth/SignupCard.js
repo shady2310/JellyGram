@@ -1,10 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+
+
 import UserDetails from "../SignUpForm/UserDetails";
 import PersonalDetails from "../SignUpForm/PersonalDetails";
 import SubirFoto from "../../assets/img/subir-foto.svg";
 
 const Signup = () => {
+  let history = useHistory();
+  
   const [img, setImg] = useState({
     img: SubirFoto,
   });
@@ -55,6 +60,7 @@ const Signup = () => {
     console.log(response.data);
     if (response.data.success === true) {
       window.localStorage.token = response.data.token;
+      history.push("/");
     } else {
       setMessage({
         text: response.data.message,
@@ -131,6 +137,7 @@ const Signup = () => {
                   className="btn btn-black btn-signup"
                 />
               </div>
+              <span className="err">{message.text}</span>
             </form>
           </div>
         ) : (

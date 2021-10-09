@@ -1,16 +1,20 @@
 .mobile-header_tittle {
-    text-align: center;
-    padding-top: 1rem;
-    padding-bottom: 3rem;
-    & h1 {
-      color: $color-black;
-      font: {
-        family: $fTitulos;
-        size: 3.6rem;
-      }
-  
-      span {
-        color: $color-blue;
-      }
+  background-color: $color-white;
+  margin-top: -6.5rem;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  // padding-bottom: 3rem;
+  & h1 {
+    color: $color-black;
+    font: {
+      family: $fTitulos;
+      size: 3.6rem;
+    }
+
+    span {
+      color: $color-blue;
     }
   }
+}

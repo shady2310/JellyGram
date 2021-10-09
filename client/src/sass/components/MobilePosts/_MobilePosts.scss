@@ -1,0 +1,26 @@
+.containerPost {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6rem;
+  margin-bottom: -15rem;
+}
+
+.postImage {
+    // width: 100%;
+  min-height: 50vh;
+  //   max-height: 40vh;
+  border-radius: 2rem;
+  object-fit: cover;
+}
+
+.containerAuthor {
+  display: flex;
+}
+
+.authorPost {
+  font: {
+    // family: "Gilroy-ExtraBold";
+    size: 1.8rem;
+  }
+  color: $color-white;
+}
