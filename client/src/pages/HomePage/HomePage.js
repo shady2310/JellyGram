@@ -15,7 +15,8 @@ const HomePage = () => {
   const getInfo = async () => {
     const response = await axios.get(`http://localhost:5000/user/home`, {
       headers: {
-        token: window.localStorage.token,
+        token: window.sessionStorage.token,
+        // token: window.localStorage.token,
       },
     });
     // console.log(response.data);

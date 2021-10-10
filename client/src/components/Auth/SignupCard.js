@@ -59,7 +59,8 @@ const Signup = () => {
     );
     console.log(response.data);
     if (response.data.success === true) {
-      window.localStorage.token = response.data.token;
+      window.sessionStorage.token = response.data.token;
+      // window.localStorage.token = response.data.token;
       history.push("/");
     } else {
       setMessage({

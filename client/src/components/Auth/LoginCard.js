@@ -3,7 +3,8 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
-  window.localStorage.token = "";
+  // window.localStorage.token = "";
+  // window.sessionStorage.token = "";
   let history = useHistory();
 
   const [values, setValues] = useState({});
@@ -28,8 +29,10 @@ const Login = () => {
     console.log(response.data);
 
     if (response.data.success === true) {
-      localStorage.removeItem("token");
-      window.localStorage.token = response.data.token;
+      // localStorage.removeItem("token");
+      window.sessionStorage.token = response.data.token;
+      // localStorage.removeItem("token");
+      // window.localStorage.token = response.data.token;
       history.push("/");
     } else {
       setMessage({
