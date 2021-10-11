@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const UserDetails = ({ nextStep, handleChange}) => {
+const UserDetails = ({ nextStep, handleChange, values}) => {
   // const Continue = (e) => {
   //   e.preventDefault();
   //   nextStep();
   // };
+  
   return (
     <div className="container-signup">
       {/* <label>
@@ -22,7 +23,7 @@ const UserDetails = ({ nextStep, handleChange}) => {
           <input
             type="email"
             name="email"
-            // value={values}
+            value={values.email || ''}
             onChange={handleChange}
             className="input-signup"
             placeholder="Correo electronico"
@@ -32,7 +33,7 @@ const UserDetails = ({ nextStep, handleChange}) => {
           <input
             type="text"
             name="fullname"
-            // value={values}
+            value={values.fullname || ''}
             onChange={handleChange}
             className="input-signup"
             placeholder="Nombre completo"
@@ -43,7 +44,7 @@ const UserDetails = ({ nextStep, handleChange}) => {
           <input
             type="text"
             name="username"
-            // value={values.username}
+            value={values.username || ''}
             onChange={handleChange}
             className="input-signup"
             placeholder="Nombre de usuario"
@@ -54,7 +55,7 @@ const UserDetails = ({ nextStep, handleChange}) => {
           <input
             type="password"
             name="password"
-            // value={values.password}
+            value={values.password || ''}
             onChange={handleChange}
             className="input-signup"
             placeholder="Contraseña"

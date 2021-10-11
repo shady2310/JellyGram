@@ -1,23 +1,36 @@
 .containerPost {
   display: flex;
   flex-direction: column;
-  margin-top: 6rem;
+  margin-top: 2.5rem;
   margin-bottom: -15rem;
-}
-
-.postImage {
-    // width: 100%;
-  min-height: 50vh;
-  //   max-height: 40vh;
-  border-radius: 2rem;
-  object-fit: cover;
 }
 
 .containerAuthor {
   display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  position: relative;
+  // left: 1rem;
+  top: 6rem;
 }
 
+.postImage {
+  // width: 100%;
+  min-height: 50vh;
+  //   max-height: 40vh;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.authorImage{
+  max-height: 5rem;
+  border-radius: 1rem;
+}
+
+
+
 .authorPost {
+  padding-left: 1rem;
   font: {
     // family: "Gilroy-ExtraBold";
     size: 1.8rem;

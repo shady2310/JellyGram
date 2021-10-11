@@ -2,14 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-
 import UserDetails from "../SignUpForm/UserDetails";
 import PersonalDetails from "../SignUpForm/PersonalDetails";
 import SubirFoto from "../../assets/img/subir-foto.svg";
 
 const Signup = () => {
+  // window.sessionStorage.token = "";
   let history = useHistory();
-  
+
   const [img, setImg] = useState({
     img: SubirFoto,
   });
@@ -19,6 +19,7 @@ const Signup = () => {
     step: 1,
   });
   const [values, setValues] = useState({});
+
   const [message, setMessage] = useState({
     text: "",
   });
@@ -77,7 +78,11 @@ const Signup = () => {
       {/* <h2>Sign up</h2> */}
       <main>
         {step.step === 1 ? (
-          <UserDetails nextStep={nextStep} handleChange={handleChange} />
+          <UserDetails
+            nextStep={nextStep}
+            handleChange={handleChange}
+            values={values}
+          />
         ) : (
           <div></div>
         )}

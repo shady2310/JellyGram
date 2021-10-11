@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
   // window.localStorage.token = "";
-  // window.sessionStorage.token = "";
+  window.sessionStorage.token = "";
   let history = useHistory();
 
   const [values, setValues] = useState({});

@@ -24,6 +24,10 @@ AuthRouter.post("/register", async (req, res) => {
       });
     }
 
+    if (!photo) {
+      photo = "https://st3.depositphotos.com/19428878/36349/v/600/depositphotos_363499050-stock-illustration-default-avatar-profile-vector-user.jpg";
+    }
+
     let regex =
       /^(([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|es|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b))$/;
 
