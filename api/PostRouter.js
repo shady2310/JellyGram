@@ -170,6 +170,8 @@ PostRouter.post("/like", async (req, res) => {
 
 PostRouter.get("/post/:postId", async (req, res) => {
   const { postId } = req.params;
+  // console.log(postId);
+  
   try {
     const singlePost = await Post.findById(
       postId,
@@ -182,6 +184,7 @@ PostRouter.get("/post/:postId", async (req, res) => {
   } catch (err) {
     res.json({
       success: false,
+      message: err.message,
     });
   }
 });
