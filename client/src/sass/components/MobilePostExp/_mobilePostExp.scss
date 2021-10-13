@@ -1,0 +1,12 @@
+.container-singlePost{
+    display: flex;
+    flex-direction: column;
+    margin-top: 6.5rem;
+    // margin-bottom: -15rem;
+}
+
+.singlePostImage {
+    min-height: 50vh;
+    border-radius: 2.5rem;
+    object-fit: cover;
+}

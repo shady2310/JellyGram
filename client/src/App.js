@@ -6,8 +6,8 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignUpPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage";
-import Test from "./components/session";
-import MobilePostExp from "./components/MobilePostExp/MobilePostExp";
+import SinglePost from "./pages/SinglePost/SinglePost"
+import ProfilePage from "./pages/ProfilePage/ProfilePage"
 
 const App = () => {
   return (
@@ -18,10 +18,11 @@ const App = () => {
             <Switch>
               <Route exact path="/login" component={LoginPage}></Route>
               <Route exact path="/signup" component={SignupPage}></Route>
-              <ProtectedRoute exact path="/post/:id" component={MobilePostExp} />
+              <ProtectedRoute exact path="/post/:id" component={SinglePost} />
               {/* <Route exact path="/" component={HomePage}></Route> */}
               {/* <Route exact path="/home" component={() => <HomePage authorized={true} />}></Route> */}
               <ProtectedRoute exact path="/" component={HomePage} />
+              <ProtectedRoute exact path="/profile" component={ProfilePage} />
               {/* <ProtectedRoute exact path="/" component={HomePage} isAuth={true} /> */}
             </Switch>
           </Router>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import axios from "axios";
+import PostComment from "../PostComment/PostComment";
 
 const MobilePostExp = () => {
   const [info, setInfo] = useState({
@@ -31,26 +32,32 @@ const MobilePostExp = () => {
     getInfo();
   }, []);
 
-  //   console.log(info.data);
-  //   console.log(data);
+  // console.log(data);
 
   if (info.data.success === false) {
     return <Redirect to="/login" />;
   }
 
-  console.log(load.isLoaded);
+  // console.log(load.isLoaded);
 
   if (load.isLoaded === false) {
     return null;
   }
+
+  // console.log(info.data.singlePost);
 
   const data = info.data.singlePost;
   const image = data.image;
 
   return (
     <div>
+      <div className="container-singlePost">
+        <img src={image} alt="post" className="singlePostImage" />
+      </div>
       <div>
-        <img src={image} alt="" />
+        {info.data.singlePost.comments.map((comment) => {
+          return <PostComment key={comment} id={comment} />;
+        })}
       </div>
     </div>
   );

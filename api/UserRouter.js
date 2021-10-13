@@ -14,7 +14,6 @@ const salt = bcrypt.genSaltSync(10);
 //////////////////////////////////////////////////////////////// INICIO ////////////////////////////////////////////////////////////////
 // TODO: YO y mis usuarios seguidos
 UserRouter.get("/home", async (req, res) => {
-  
   const id = req.body.userId;
 
   const user = await User.findById(id, "username following photo");
@@ -327,9 +326,23 @@ UserRouter.get("/following", async (req, res) => {
 UserRouter.get("/profile/posts", async (req, res) => {
   const id = req.body.userId;
   try {
-    const posts = await User.findById(id, "posts");
+    const postsId = await User.findById(id, "posts");
+    // console.log(postsId.posts);
+
+    const idPosts = postsId.posts;
+
+    let posts = [];
+
+    for (let i = 0; i < idPosts.length; i++) {
+      let postEncontrado = await Post.findById(idPosts[i]).select("image");
+      // console.log(postEncontrado);
+      posts.push(postEncontrado);
+    }
+    // console.log(posts);
+
     res.json({
       success: true,
+      postsId,
       posts,
     });
   } catch (err) {

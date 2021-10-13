@@ -5,7 +5,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import MobileNav from "../../components/MobileNav/MobileNav";
 import MobileHeader from "../../components/MobileHeader/MobileHeader";
 import MobilePosts from "../../components/MobilePost/MobilePost";
-// { authorized }
+
 const HomePage = () => {
   const [info, setInfo] = useState({
     data: [],
