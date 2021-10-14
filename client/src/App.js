@@ -8,6 +8,7 @@ import SignupPage from "./pages/SignUpPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage";
 import SinglePost from "./pages/SinglePost/SinglePost"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
+import ExplorePage from "./pages/ExplorePage/ExplorePage";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
               {/* <Route exact path="/home" component={() => <HomePage authorized={true} />}></Route> */}
               <ProtectedRoute exact path="/" component={HomePage} />
               <ProtectedRoute exact path="/profile" component={ProfilePage} />
+              <ProtectedRoute exact path="/explore" component={ExplorePage} />
               {/* <ProtectedRoute exact path="/" component={HomePage} isAuth={true} /> */}
             </Switch>
           </Router>

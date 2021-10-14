@@ -11,7 +11,7 @@ const MobileNav = () => {
             <BiHomeAlt />
           </NavLink>
 
-          <NavLink to="/" className="mobileNavLink">
+          <NavLink to="/explore" className="mobileNavLink">
             <BiSearch />
           </NavLink>
 

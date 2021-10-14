@@ -16,3 +16,8 @@ body {
   box-sizing: border-box;
   background-color: $blanco;
 }
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Posts = () => {
+const Explore = () => {
   const [info, setInfo] = useState({
     data: [],
   });
@@ -10,20 +10,13 @@ const Posts = () => {
     isLoaded: false,
   });
 
-  const [img, setImg] = useState({
-    img: [],
-  });
-
   const getInfo = async () => {
-    const response = await axios.get(
-      `http://localhost:5000/user/profile/posts`,
-      {
-        headers: {
-          token: window.sessionStorage.token,
-          // token: window.localStorage.token,
-        },
-      }
-    );
+    const response = await axios.get(`http://localhost:5000/post/explore`, {
+      headers: {
+        token: window.sessionStorage.token,
+        // token: window.localStorage.token,
+      },
+    });
     setInfo({
       data: response.data,
     });
@@ -31,7 +24,6 @@ const Posts = () => {
     setLoad({
       isLoaded: true,
     });
-    setImg({ img: response.data.posts });
   };
 
   useEffect(() => {
@@ -42,16 +34,12 @@ const Posts = () => {
     return null;
   }
 
-  //   console.log(info.data.postsId.posts);
-  //   console.log(img.img);
-  //   console.log(info.data.postInfo.image);
-
-  //   const image = info.data.postInfo.image
+//   console.log(info.data.posts);
 
   return (
     <div>
-      <div className="contenedorImagenesPerfil">
-        {img.img.map((image) => {
+      <div>
+        {info.data.posts.map((image) => {
           return (
             <img
               key={image._id}
@@ -66,4 +54,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default Explore;

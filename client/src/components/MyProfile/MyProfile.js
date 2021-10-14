@@ -39,7 +39,7 @@ const MyProfile = () => {
     return <Redirect to="/login" />;
   }
 
-//   console.log(info.data.myProfile);
+  //   console.log(info.data.myProfile);
 
   const username = info.data.myProfile.username;
   const image = info.data.myProfile.photo;
@@ -49,18 +49,24 @@ const MyProfile = () => {
   // TODO: poner constantes en un estado
 
   return (
-    <div>
-      <div>
-        <img src={image} alt="Foto" />
+    <div className="container-MyProfile">
+      <div className="MyProfile">
+        <div>
+          <span>{cantidadSeguidores}</span>
+          <p>Seguidores</p>
+        </div>
+
+        {/* <div className="container-imagenMyProfile"> */}
+        <img src={image} alt="Foto" className="imagenMyProfile" />
+
+        {/* </div> */}
+        <div>
+          <span>{cantidadSiguiendo} </span>
+          <p>Siguiendo</p>
+        </div>
       </div>
-      <div>
-        <p>
-          Seguidores: <span>{cantidadSeguidores}</span>
-        </p>
+      <div className="MyProfile-Username">
         <p>{username}</p>
-        <p>
-          Siguiendo: <span>{cantidadSiguiendo}</span>
-        </p>
       </div>
     </div>
   );

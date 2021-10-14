@@ -56,7 +56,7 @@ const Auth = (req, res, next) => {
     });
   } else {
     res.send({
-      mensaje: "Token no proveída.",
+      message: "Token no proveída.",
     });
   }
 };

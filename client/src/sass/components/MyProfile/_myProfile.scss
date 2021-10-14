@@ -1,0 +1,42 @@
+.container-MyProfile {
+  margin-top: 1rem;
+}
+.MyProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+
+  span {
+    font-size: 1.5rem;
+    margin-bottom: -1rem;
+  }
+}
+
+// .container-imagenMyProfile {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+.imagenMyProfile {
+  width: 15%;
+  border-radius: 2rem;
+}
+
+.MyProfile-Username {
+  text-align: center;
+  p {
+    font-size: 1.8rem;
+  }
+}

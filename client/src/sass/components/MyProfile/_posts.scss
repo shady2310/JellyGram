@@ -11,10 +11,19 @@
   justify-content: center;
   overflow: hidden;
 
+  // margin: 0 auto; width: 60%;
+
   @include respond(phone) {
     grid-column-gap: 2px;
     grid-row-gap: 2px;
+    // margin: 0 auto; width: 80%;
   }
+  
+  // @include respond(tab-port) {
+  //   grid-column-gap: 2px;
+  //   grid-row-gap: 2px;
+  //   margin: 0 auto; width: 90%;
+  // }
 
   & > *:nth-child(18n + 2) {
     grid-column: 2 / -1;
@@ -28,7 +37,7 @@
 }
 
 .imagenesPerfil {
-  //     display: flex;
+  // display: flex;
   width: 100%;
   height: auto;
   //   //   max-height: 40vh;
