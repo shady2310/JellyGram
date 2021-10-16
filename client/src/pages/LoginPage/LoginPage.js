@@ -25,7 +25,7 @@ const Home = () => {
       <main className="container-home">
         <div className="container-card">
           <LoginCard />
-          {/* <img src={cardBorder} alt="card-border" /> */}
+          <img src={cardBorder} alt="card-border" className="cardBorderLogin" />
         </div>
       </main>
       {/* <footer>

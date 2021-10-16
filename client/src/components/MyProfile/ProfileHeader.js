@@ -8,7 +8,6 @@ const ProfileHeader = () => {
       <Link to="/config">
         <BiCog size="3em" />
       </Link>
-      <Link></Link>
     </div>
   );
 };

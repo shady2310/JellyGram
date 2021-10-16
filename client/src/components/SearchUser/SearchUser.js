@@ -24,10 +24,10 @@ const SearchUser = (info) => {
   // console.log(info);
 
   return (
-    <div>
+    <div className="containerSearchUser">
       {info.data.map((user) => {
         return (
-          <div>
+          <div className="SearchUserInfo">
             <p className="">{user.username}</p>
             <img
               key={user._id}
@@ -38,7 +38,6 @@ const SearchUser = (info) => {
           </div>
         );
       })}
-      <div>hola</div>
     </div>
   );
 };

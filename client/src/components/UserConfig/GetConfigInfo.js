@@ -57,7 +57,7 @@ const GetInfo = () => {
         <label>
           Genero
           <select name="gender">
-            <option selected="true" disabled="disabled" value="Hombre">{info.data.userInfo.gender} </option>
+            <option selected="true" disabled="disabled">{info.data.userInfo.gender} </option>
             <option value="Hombre">Hombre</option>
             <option value="Mujer">Mujer</option>
           </select>

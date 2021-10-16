@@ -66,25 +66,32 @@ const UploadComponent = () => {
 
   console.log(images);
 
-  const styleUpload = {
-    display: images ? "block" : "none",
-  };
+  // const styleUpload = {
+  //   display: images ? "block" : "none",
+  // };
+
+  const defaultImage = "https://st3.depositphotos.com/19428878/36349/v/600/depositphotos_363499050-stock-illustration-default-avatar-profile-vector-user.jpg"
 
   return (
     <div>
       <div>
-        <label>
-          Subir Foto
-          <input type="file" name="file" onChange={handleUpload} />
-        </label>
         {loading ? (
           <div></div>
         ) : (
-          <div style={styleUpload}>
-            <img src={images ? images.url : ""} alt="foto" />
-            <span onClick={handleDelete}>X</span>
+          // <div style={styleUpload}>
+          <div className="containerImagePreview">
+            <img
+              src={images ? images.url : defaultImage}
+              alt="foto"
+              className="imagePreviewUpload"
+            />
+            <span onClick={handleDelete} className="deleteImagePreview">X</span>
           </div>
         )}
+        <label className="inputImageUpload">
+          Subir Foto
+          <input type="file" name="file" onChange={handleUpload} />
+        </label>
       </div>
     </div>
   );

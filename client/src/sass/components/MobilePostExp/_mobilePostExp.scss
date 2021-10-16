@@ -21,6 +21,7 @@
   @include respond(phone) {
     grid-column-gap: 2px;
     grid-row-gap: 2px;
+    padding-bottom: 7rem;
     // margin: 0 auto; width: 80%;
   }
 

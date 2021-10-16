@@ -43,25 +43,23 @@ const Posts = () => {
   }
 
   //   console.log(info.data.postsId.posts);
-    // console.log(img.img);
-    // console.log(info.data.postInfo.image);
+  // console.log(img.img);
+  // console.log(info.data.postInfo.image);
 
   //   const image = info.data.postInfo.image
 
   return (
-    <div>
-      <div className="contenedorImagenesPerfil">
-        {img.img.map((image) => {
-          return (
-            <img
-              key={image._id}
-              src={image.image}
-              alt="foto"
-              className="imagenesPerfil"
-            />
-          );
-        })}
-      </div>
+    <div className="contenedorImagenesPerfil">
+      {img.img.map((image) => {
+        return (
+          <img
+            key={image._id}
+            src={image.image}
+            alt="foto"
+            className="imagenesPerfil"
+          />
+        );
+      })}
     </div>
   );
 };

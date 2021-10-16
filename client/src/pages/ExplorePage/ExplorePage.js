@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import SearchUser from "../../components/SearchUser/SearchUser";
 import MobileNav from "../../components/MobileNav/MobileNav";
 import Explore from "../../components/Explore/Explore";
 import axios from "axios";
-import { Redirect } from "react-router";
 
 const ExplorePage = () => {
   const [explore, setExplore] = useState({
