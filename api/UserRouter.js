@@ -106,7 +106,7 @@ UserRouter.get("/home", async (req, res) => {
 
 //////////////////////////////////////////////////////////////// Buscar USER by Username ////////////////////////////////////////////////////////////////
 
-UserRouter.get("/searchUser", async (req, res) => {
+UserRouter.post("/searchUser", async (req, res) => {
   // const id  = req.body.userId;
   const { username } = req.body;
   try {

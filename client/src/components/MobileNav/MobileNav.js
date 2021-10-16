@@ -15,7 +15,7 @@ const MobileNav = () => {
             <BiSearch />
           </NavLink>
 
-          <NavLink to="/" className="mobileNavLink">
+          <NavLink to="/upload" className="mobileNavLink">
             <BiMessageSquareAdd />
           </NavLink>
 

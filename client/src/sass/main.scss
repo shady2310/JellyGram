@@ -17,8 +17,11 @@
 @import "./components/MobilePostExp/mobilePostExp";
 @import "./components/MyProfile/posts";
 @import "./components/MyProfile/myProfile";
+@import "./components/MyProfile/profileHeader";
+@import "./components/GetConfigInfo/getConfigInfo";
 
 // PAGINAS
 
 @import "./pages/loginPage";
 @import "./pages/signupPage";
+@import "./pages/explorePage"

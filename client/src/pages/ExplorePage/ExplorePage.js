@@ -4,13 +4,18 @@ import SearchUser from "../../components/SearchUser/SearchUser";
 import MobileNav from "../../components/MobileNav/MobileNav";
 import Explore from "../../components/Explore/Explore";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 const ExplorePage = () => {
   const [explore, setExplore] = useState({
     render: false,
   });
 
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    username: "",
+  });
+
+  const username = values.username;
 
   const handleChange = (event) => {
     setValues((prevValues) => ({
@@ -18,6 +23,7 @@ const ExplorePage = () => {
       [event.target.name]: event.target.value,
     }));
     // TODO: dejarme de crear componentes raros
+    getInfo();
   };
 
   const click = () => {
@@ -28,47 +34,42 @@ const ExplorePage = () => {
     setExplore({ render: false });
   };
 
-
   const [info, setInfo] = useState({
     data: [],
   });
 
-  const [load, setLoad] = useState({
-    isLoaded: false,
-  });
-
-
-
   const getInfo = async () => {
-    const response = await axios.get(`http://localhost:5000/user/searchUser`, {
-      headers: {
-        token: window.sessionStorage.token,
-        // token: window.localStorage.token,
-      },values
-    });
+    const response = await axios.post(
+      `http://localhost:5000/user/searchUser`,
+      {
+        username,
+      },
+      {
+        headers: {
+          token: window.sessionStorage.token,
+          // token: window.localStorage.token,
+        },
+      }
+    );
     setInfo({
       data: response.data,
     });
-    console.log(response.data);
-    // setLoad({
-    //   isLoaded: true,
-    // });
+    // console.log(response.data);
   };
 
-  useEffect(() => {
-    getInfo();
-  }, []);
+  // useEffect(() => {
+  //   getInfo();
+  // }, []);
 
-//   if (load.isLoaded === false) {
-//     return null;
-//   }
-  
+  // if (load.isLoaded === false) {
+  //   return null;
+  // }
 
-//   console.log(values);
+  // console.log(info.data.users);
 
   return (
     <div>
-      <div>
+      <div className="container-busquedaExplorePage">
         <input
           type="text"
           placeholder="Buscar"
@@ -80,7 +81,7 @@ const ExplorePage = () => {
           <button onClick={click2}>Cancelar</button>
         ) : null}
       </div>
-      {/* {explore.render === true ? <SearchUser data={values} /> : null} */}
+      {explore.render === true ? <SearchUser data={info.data.users} /> : null}
       <Explore />
       <MobileNav />
     </div>

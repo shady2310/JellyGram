@@ -28,7 +28,8 @@ PostRouter.get("/explore", async (req, res) => {
 
 PostRouter.post("/newPost", (req, res) => {
   try {
-    const id  = req.body.userId;
+    const id = req.body.userId;
+
     const { description } = req.body;
     // console.log(req.files);
 
@@ -39,7 +40,7 @@ PostRouter.post("/newPost", (req, res) => {
       });
     }
 
-    let imagen = req.files.imagen;
+    let imagen = req.files.file;
     // console.log(imagen);
 
     if (imagen.size > 1024 * 1024 * 2) {
@@ -88,7 +89,7 @@ PostRouter.post("/newPost", (req, res) => {
       }
     );
   } catch (err) {
-    return res.status(500).json({
+    return res.json({
       success: false,
       message: err.message,
     });
@@ -99,7 +100,7 @@ PostRouter.post("/newPost", (req, res) => {
 
 PostRouter.post("/deletePost", async (req, res) => {
   try {
-    const id  = req.body.userId;
+    const id = req.body.userId;
     const { public_id, postId } = req.body;
     if (!public_id) {
       return res.status(400).json({
@@ -130,7 +131,7 @@ PostRouter.post("/deletePost", async (req, res) => {
       message: "Post eliminado correctamente",
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.json({
       success: false,
       message: err.message,
     });
@@ -171,7 +172,7 @@ PostRouter.post("/like", async (req, res) => {
 PostRouter.get("/post/:postId", async (req, res) => {
   const { postId } = req.params;
   // console.log(postId);
-  
+
   try {
     const singlePost = await Post.findById(
       postId,

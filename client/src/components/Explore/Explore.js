@@ -38,14 +38,14 @@ const Explore = () => {
 
   return (
     <div>
-      <div>
+      <div className="container-PostsExplore">
         {info.data.posts.map((image) => {
           return (
             <img
               key={image._id}
               src={image.image}
               alt="foto"
-              className="imagenesPerfil"
+              className="singlePostImage"
             />
           );
         })}

@@ -1,46 +1,43 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-
-const SearchUser = (datos) => {
-  const [info, setInfo] = useState({
-    data: [],
-  });
-
-  const [load, setLoad] = useState({
-    isLoaded: false,
-  });
+import React from "react";
 
 
 
-  const getInfo = async () => {
-    const response = await axios.post(`http://localhost:5000/user/searchUser`, {
-      headers: {
-        token: window.sessionStorage.token,
-        // token: window.localStorage.token,
-      },
-    });
-    setInfo({
-      data: response.data,
-    });
-    console.log(response.data);
-    setLoad({
-      isLoaded: true,
-    });
-  };
+const SearchUser = (info) => {
+  // const [load, setLoad] = useState({
+  //   isLoaded: false,
+  // });
 
-  useEffect(() => {
-    getInfo();
-  }, []);
-
-  if (load.isLoaded === false) {
+  if (info.data === undefined) {
     return null;
   }
 
-  
-  
+  // setLoad({
+  //   isLoaded: true,
+  // });
+
+  // if (load.isLoaded === false) {
+  //   return null;
+  // }
+
+  // console.log(datos.data);
+
+  // console.log(info);
 
   return (
     <div>
+      {info.data.map((user) => {
+        return (
+          <div>
+            <p className="">{user.username}</p>
+            <img
+              key={user._id}
+              src={user.photo}
+              alt="foto"
+              className="authorImage"
+            />
+          </div>
+        );
+      })}
       <div>hola</div>
     </div>
   );
