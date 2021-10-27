@@ -75,6 +75,7 @@ const ExplorePage = () => {
           onClick={click}
           name="username"
           onChange={handleChange}
+          className="inputBusquedaUsuario"
         />
         {explore.render === true ? (
           <button onClick={click2}>Cancelar</button>

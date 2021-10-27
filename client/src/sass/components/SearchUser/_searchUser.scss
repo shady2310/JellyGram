@@ -1,9 +1,10 @@
-.containerSearchUser{
-    display: flex;
-    flex-direction: column;
+.containerSearchUser {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.SearchUserInfo{
-    display: flex;
-    align-items: center;
+.SearchUserInfo {
+  display: flex;
+  align-items: center;
 }

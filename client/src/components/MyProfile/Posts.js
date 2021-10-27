@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import PostExp from "./PostExp";
 
 const Posts = () => {
   const [info, setInfo] = useState({
@@ -42,23 +43,16 @@ const Posts = () => {
     return null;
   }
 
-  //   console.log(info.data.postsId.posts);
+  // console.log(info.data.postsId._id);
   // console.log(img.img);
   // console.log(info.data.postInfo.image);
 
-  //   const image = info.data.postInfo.image
+  // const image = info.data.postInfo.image
 
   return (
     <div className="contenedorImagenesPerfil">
       {img.img.map((image) => {
-        return (
-          <img
-            key={image._id}
-            src={image.image}
-            alt="foto"
-            className="imagenesPerfil"
-          />
-        );
+        return <PostExp image={image} key={image._id} />;
       })}
     </div>
   );

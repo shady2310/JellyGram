@@ -13,7 +13,7 @@ const MobilePosts = ({ data }) => {
   const authorPost = data.author[0].username;
   const image = data.image;
   // console.log(data);
-  // console.log(image);
+  // console.log(postId);
   const imageClick = () => {
     history.push(`/post/${postId}`)
   };
