@@ -1,7 +1,7 @@
 <!-- LOGO -->
 <p align="center">
   <a href="https://github.com/shady2310/JellyGram">
-    <img src="ReadMe\JellyGram_logo.png" alt="Logo" width="80" height="80">
+    <img src="ReadMe\Logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">JellyGram</h3>
