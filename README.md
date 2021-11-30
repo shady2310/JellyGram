@@ -56,6 +56,6 @@ AJustes de la cuenta
 ## Wireframes
 
 <div align="center">
-<img src="ReadMe\Mobile_Home.png" height="190">
-<img src="ReadMe/mobile_inicio.png" height="190">
+<img src="ReadMe\Mobile_Home.png" height="812">
+<img src="ReadMe/mobile_inicio.png" height="812">
 </div>
