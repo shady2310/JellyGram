@@ -21,11 +21,6 @@
 </p>
 
 
-
-
-
-# <p align="center"><strong>JellyGram</strong></p>
-
 <h2 align="center"><strong>¿Qué es JellyGram?</strong></h2>
 
 JellyGram te permite compartir fotos con tus amigos y tus seguidores. Ademas podrás compartir experiencias con personas de todo el mundo.
@@ -55,3 +50,12 @@ otros usuarios
 ### Ajustes
 
 AJustes de la cuenta
+
+
+
+## Wireframes
+
+<div align="center">
+<img src="ReadMe\Mobile_Home.png" height="190">
+<img src="ReadMe/mobile_inicio.png" height="190">
+</div>
