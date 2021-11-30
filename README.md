@@ -59,3 +59,10 @@ AJustes de la cuenta
 <img src="ReadMe\Mobile_Home.png" height="812">
 <img src="ReadMe/mobile_inicio.png" height="812">
 </div>
+
+<br>
+
+<div align="center">
+<img src="ReadMe/mobile_foto.png" height="812">
+<img src="ReadMe/mobile_foto-comentarios_ampliados.png" height="812">
+</div>
