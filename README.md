@@ -1,3 +1,29 @@
+<!-- LOGO -->
+<p align="center">
+  <a href="https://github.com/shady2310/JellyGram">
+    <img src="ReadMe\JellyGram_logo" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">JellyGram</h3>
+
+  <p align="center">
+    Descripción del proyecto
+    <br />
+    <a href="https://github.com/shady2310/JellyGram/blob/master/README.md"><strong>ReadMe »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/shady2310/JellyGram">Ver archivos</a>
+    ·
+    <a href="https://github.com/shady2310/JellyGram/issues">Reportar Bug</a>
+    ·
+    <a href="https://github.com/shady2310/JellyGram/issues">Solicitar funcionalidad</a>
+  </p>
+</p>
+
+
+
+
+
 # <p align="center"><strong>JellyGram</strong></p>
 
 <h2 align="center"><strong>¿Qué es JellyGram?</strong></h2>
